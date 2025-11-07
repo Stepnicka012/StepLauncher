@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="./css/launcher.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="./css/launcher.css">
+    <title>StepLauncher</title>
+</head>
+<body class="BodyApp">
+    <div class="TittleBar">
+        <div class="Tittle">
+            <img src="./assets/icon.png" alt="StepLauncher.png">
+            <h4>StepLauncher</h4>
+        </div>
+        <div class="TittleButton">
+            <button id="minBtn"><img src="./assets/svg/window/remove-and-minized.svg" loading="lazy"></button>
+            <button id="maxBtn"><img src="./assets/svg/window/window-1.svg" id="maxIcon" loading="lazy"></button>
+            <button id="closeBtn"><img src="./assets/svg/window/close.svg" loading="lazy"></button>
+        </div>
+    </div>
+    <div class="BackgroundVideo" tabindex="-1">
+        <video autoplay loop muted>
+            <source src="">
+        </video>
+    </div>
+    <div class="LoaderProgram">
+        <div class="LoaderProgram-Top">
+            <img src="./assets/icon.png" alt="IconProgram.png" loading="lazy">
+        </div>
+        <div class="LoaderProgram-Bottom">
+            <div class="Progress">
+                <div class="Bar"></div>
+            </div>
+            <div class="Bottom">
+                <div class="Text">Cargando Interfaz...</div>
+                <span class="Loader"></span>
+            </div>
+        </div>
+    </div>
+    <main class="App-Content">
+        <div class="Sidebar">
+            <!--  -->
+            <div class="Sidebar-Item">
+                <div class="Description">
+                    <span data-lang="Sidebar.Descripciones.Opciones"></span>
+                </div>
+                <div class="Content-Item">
+                    <img src="./assets/svg/menu/settings.svg" alt="Settings" loading="lazy">
+                    <p data-lang="Sidebar.Texto.Opciones"></p>
+                </div>
+            </div>
+            <!--  -->
+            <div class="Sidebar-Item">
+                <div class="Description">
+                    <span data-lang="Sidebar.Descripciones.Instancias"></span>
+                </div>
+                <div class="Content-Item">
+                    <img src="./assets/svg/menu/instancies.svg" alt="Instancies" loading="lazy">
+                    <p data-lang="Sidebar.Texto.Instancias"></p>
+                </div>
+            </div>
+            <!--  -->
+            <div class="Sidebar-Item">
+                <div class="Description">
+                    <span data-lang="Sidebar.Descripciones.Descarga"></span>
+                </div>
+                <div class="Content-Item">
+                    <img src="./assets/svg/menu/download.svg" alt="Download" loading="lazy">
+                    <p data-lang="Sidebar.Texto.Descargar"></p>
+                </div>
+            </div>
+             <!--  -->
+            <div class="Sidebar-Item">
+                <div class="Description">
+                    <span data-lang="Sidebar.Descripciones.Jugar"></span>
+                </div>
+                <div class="Content-Item">
+                    <img src="./assets/svg/menu/game.svg" alt="Play" loading="lazy">
+                    <p data-lang="Sidebar.Texto.Jugar"></p>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+        <div class="Content">
+            <div class="Hotbar">
+                <button id="scrollToggle"> <p class="Description" data-lang="Buttons.Console"></p> <img src="./assets/svg/others/arrow.svg"></button>
+            </div>
+            <div class="Container_Content">
+                <section id="ContentNews">
+                    <div class="WebviewContainer">
+                        <webview src="./html/news.html" preload="./webview/news.js">
+                        </webview>
+                        <h4 class="WebViewIndicatorContainer">
+                            <p class="WebviewLoader"></p>
+                            <div class="WebViewIndicator"></div>
+                        </h4>
+                    </div>
+                </section>
+                <section id="ContentBackend">
+                </section>
+            </div>
+        </div>
+        <!-- <div class="PanelsContainer">
+            <dialog class="Dialog-Item" open="true">
+                <div class="TittleDialog">
+                    <div><h3>Descargar</h3></div>
+                    <button><img src="./assets/svg/window/close.svg"></button>
+                </div>
+                <div class="ContentDialog">
+                    <div class="SelectMode">                        
+                        <div class="SelectMode-Item"><img src="./assets/icons/grass_block.png" loading="lazy"><p>Release</p></div>
+                        <div class="SelectMode-Item"><img src="./assets/icons/dirt.png" loading="lazy"><p>Snapshots</p></div>
+                        <div class="SelectMode-Item"><img src="./assets/icons/forge.png" loading="lazy"><p>Forge</p></div>
+                        <div class="SelectMode-Item"><img src="./assets/icons/neoforge.png" loading="lazy"><p>NeoForge</p></div>
+                        <div class="SelectMode-Item"><img src="./assets/icons/optifine.png" loading="lazy"><p>Optifine</p></div>
+                        <div class="SelectMode-Item"><img src="./assets/icons/quilt.png" loading="lazy"><p>Quilt</p></div>
+                        <div class="SelectMode-Item"><img src="./assets/icons/legacyfabric.png" loading="lazy"><p>LegacyFabric</p></div>
+                        <div class="SelectMode-Item"><img src="./assets/icons/fabric.png" loading="lazy"><p>Fabric</p></div>
+                    </div>
+                </div>
+            </dialog>
+        </div> -->
+    </main>
+    <script src="../source/renderer/global.js" type="module"></script>
+    <script>
+        const container = document.querySelector('.Container_Content');
+        const button = document.getElementById('scrollToggle');
+
+        const updateButtonClass = () => {
+            if (container.scrollTop === 0) {
+                button.classList.remove('active');
+            } else if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+                button.classList.add('active');
+            }
+        };
+
+        button.addEventListener('click', () => {
+            if (container.scrollTop === 0) {
+                container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+                button.classList.add('active');
+            } else {
+                container.scrollTo({ top: 0, behavior: 'smooth' });
+                button.classList.remove('active');
+            }
+        });
+
+        container.addEventListener('scroll', updateButtonClass);
+    </script>
+</body>
+</html>

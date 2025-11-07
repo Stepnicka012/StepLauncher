@@ -1,0 +1,91 @@
+{
+  "name": "steplauncher",
+  "version": "1.0.0",
+  "description": "StepLauncher: launcher moderno y potente para Minecraft con soporte de modpacks, mods, instancias, etc...",
+  "main": "./source/app.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "npm run build:tsc && electron .",
+    "build:tsc": "tsc",
+    "typescript:launcher": "tsc -p tsconfig.json",
+    "typescript:preload": "tsc -p tsconfig.preload.json",
+    "build:tsc:watch": "tsc -w",
+    "build:preloads": "tsc -p tsconfig.preload.json",
+    "build:windows": "npm run build:tsc && electron-builder --win",
+    "build:linux": "npm run build:tsc && electron-builder --linux",
+    "build:all": "npm run build:tsc && electron-builder"
+  },
+  "keywords": [
+    "StepLauncher",
+    "Minecraft",
+    "Launcher",
+    "ModLoaders",
+    "Forge",
+    "Fabric",
+    "NeoForge",
+    "Optifine",
+    "Quilt",
+    "Minecraft-Core-Master",
+    "Electron",
+    "StepnickaSantiago",
+    "Mods",
+    "Shaders",
+    "Music",
+    "DataPacks",
+    "Minecraft-Launcher",
+    "Open-Source",
+    "Minecraft-Java-Core",
+    "Electron-App",
+    "Minecraft-Node",
+    "Typescript"
+  ],
+  "author": "StepnickaSantiago <stepnicka012@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "electron": "^38.4.0",
+    "electron-builder": "^26.0.12",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.2",
+    "pino": "^10.1.0"
+  },
+  "build": {
+    "appId": "com.novastep.steplauncher",
+    "productName": "StepLauncher",
+    "asar": false,
+    "directories": {
+      "buildResources": "public/**/*",
+      "output": "Release/${productName}-${version}-${author}-${platform}-${arch}"
+    },
+    "files": [
+      "public/**/*",
+      "source/**/*",
+      "LICENSE",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "./public/assets/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "snap"
+      ],
+      "category": "Game",
+      "icon": "./public/assets/icon.png"
+    }
+  }
+}

@@ -1,0 +1,296 @@
+@font-face {
+    font-family: "Comfortaa";
+    src: url('../assets/fonts/Comfortaa.woff2') format('woff2');
+    font-style: normal;
+    font-display: swap;
+}
+
+:root{
+    /* Shadows */
+    --Shadow: #0005;
+    --Shadow-Text: #000;
+    
+    /* Borders */
+    --Sidebar-Item-Border: #555;
+    --Border-Neon: aqua;
+    --Border-Shadow: cyan;
+
+    --Sidebar-Border-Right:#3335;
+    --Sidebar-Item-Border-Right: #5555;
+
+    /* Backgrounds */
+    --Bg-App: url("../assets/background/10.webp");
+    --Button-BG: #1118;
+    --Sidebar-BG: #1119;
+    --Button-Item-BG: #222;
+    --Sidebar-Item-Description-BG: #1116;
+    --ProgramLoader: #111;
+    --Dialog-Bg: #222;
+
+    /* Others */
+    --Bg-Video-Cover: cover;
+}
+* {
+    -webkit-app-region:no-drag;
+    user-select: none;
+    box-sizing: border-box;
+    outline: none;
+    img{
+        object-fit: cover;
+        pointer-events: none;
+    }
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00D8D2;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00757A;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+    margin: 0;
+    padding: 0;
+}
+.BodyApp{
+    background: var(--Bg-App);
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+.TittleBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2.2rem;
+    background: #222;
+    box-shadow: 0 0.2em 0.5em #0005;
+    -webkit-app-region: drag !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: all;
+    z-index: 9999;
+    div{
+        height: 100%;
+    }
+    .Tittle{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: Comfortaa,Arial, Helvetica, sans-serif;
+        font-size: 1rem;
+        font-weight: lighter;
+        margin-left: 0.2em;
+        pointer-events: none;
+        img{
+            width: 2em;
+        }
+        &:after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-app-region:drag;
+            z-index: 1;
+        }
+    }
+    .TittleButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        -webkit-app-region:no-drag;
+        button{
+            background-color:transparent; 
+            width: 2.5rem;
+            height: 100%;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: 1rem;
+                image-rendering: optimizeSpeed;
+            }
+            &:nth-child(2) img{
+                rotate: -180deg;
+            }
+            &:hover{
+                background-color: #555;
+                &:nth-child(3){
+                    background-color: rgba(255, 0, 0, 0.3);
+                }
+            }
+        }
+    }
+}
+.WebviewLoader,.Loader {
+    width: 1em;
+    height: 1em;
+    border: 3px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+@keyframes rotation {0% {transform: rotate(0deg);}100% {transform: rotate(360deg);}}
+.WebviewContainer{
+    height: calc(100% - 2.2rem);
+    width: 100%;
+    webview{
+        display: inline-flex;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    .WebViewIndicatorContainer{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color:rgb(255, 255, 255,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+        font-family: Comfortaa, Arial, Helvetica, sans-serif;
+        z-index: 1;
+    }
+}
+.BackgroundVideo{
+    position: fixed;
+    top: 2.2rem;
+    left: 0;
+    height: calc(100% - 2.2rem);
+    width: 100%;
+    z-index: -1;
+    pointer-events: none;
+    user-select: none;
+    video,source{
+        object-fit: var(--Bg-Video-Cover);
+        width: 100%;
+        height: 100%;
+    }
+}
+.App-Content{
+    position: absolute;
+    top: 2.2rem;
+    left: 0;
+    width: 100%;
+    height: calc(100dvh - 2.2rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+@keyframes TopMove{
+    100%{
+        top: -150%;
+        pointer-events: none;
+    }
+}
+@keyframes BottomMove{
+    100%{
+        bottom: -150%;
+        pointer-events: none;
+    }
+}
+.LoaderProgram{
+    position: fixed;
+    top: 2.2rem;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 2.2rem);
+    z-index: 9990;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &.loadComplete{
+        pointer-events: none;
+        .LoaderProgram-Bottom{
+            animation: BottomMove 1s ease-in-out forwards;
+        }
+        .LoaderProgram-Top{
+            animation: TopMove 1s ease-in-out forwards;
+        }
+    }
+    .LoaderProgram-Top{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background-color: var(--ProgramLoader);
+        border-bottom:1px solid #0005;
+        z-index: 1;
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(60%) translateX(-50%);
+            width: 10rem;
+        }
+    }
+    .LoaderProgram-Bottom{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background-color: var(--ProgramLoader);
+        border-top:1px solid #0005;
+        .Progress{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: .3rem;
+            background: transparent;
+            z-index: 1;
+            .Bar{
+                background: linear-gradient(90deg,blue 90%,aqua);
+                width: 0%;
+                height: 100%;
+                border-top-right-radius: 0.5em;
+                border-bottom-right-radius: 0.5em;
+                transition: width 0.1s ease-in-out;
+            }
+        }
+        .Bottom{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0 1em;
+            height: 3rem;
+            background: linear-gradient(transparent,#1155);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .Text{
+                font-family: "Comfortaa",Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+}

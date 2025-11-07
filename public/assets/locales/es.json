@@ -1,0 +1,58 @@
+{
+    "VersionLang": 1,
+    "Launcher": {
+        "tittle": "StepLauncher"
+    },
+    "Connection":{
+        "State-1":"Conexión Estable",
+        "State-2":"Conexión Media",
+        "State-3":"Conexión Baja",
+        "State-4":"Sin Conexión"
+    },
+    "News": {
+        "ViewChangelog": "Ver Changelog",
+        "Release": "Minecraft Release:",
+        "Snapshot": "Minecraft Snapshot:",
+        "NoDescription": "Sin descripción disponible.",
+        "ConnectionError": "Fallo de conexión al cargar noticias.",
+        "ErrorChangelog": "Error al cargar el changelog",
+        "ExitChangelog": "Salir del Changelog",
+        "Images":{
+            "Snapshots":"../assets/banner/Buzzy-Bees_1280x768.png",
+            "Releases":"../assets/banner/Minecraft_Fall_Drop_Campaign_Key_Art_DotNet_Blog_Editorial_1280x768.png",
+            "StepLauncher":"../assets/icon.png"
+        }
+    },
+    "Webview":{
+        "loading":"Cargando...",
+        "Noticias":{
+            "Recargar":"Recargar",
+            "CargarMas":"Cargar Mas",
+            "Ocultar":"Ocultar Noticias",
+            "Mostrar": "Mostrar Noticias",
+            "Panel":{
+                "StepLauncher":"StepLauncher",
+                "Releases":"Releases",
+                "Snapshots":"Snapshots",
+                "Salir": "Salir del Menu"
+            }
+        }
+    },
+    "Buttons":{
+        "Console":"Consola"
+    },
+    "Sidebar": {
+        "Descripciones": {
+            "Opciones": "Tunea StepLauncher y personaliza tu Minecraft",
+            "Instancias": "Crea, clona y organiza mundos o perfiles de Minecraft",
+            "Descarga": "Consigue cualquier versión de Minecraft en minutos",
+            "Jugar": "¡Lanza tu Minecraft y empieza la aventura!"
+        },
+        "Texto": {
+            "Opciones": "Configurar",
+            "Instancias": "Instancias",
+            "Descargar": "Descargar",
+            "Jugar": "Jugar"
+        }
+    }
+}

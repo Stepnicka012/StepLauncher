@@ -1,0 +1,7 @@
+@import url('./global.css');
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-drag: none;
+}

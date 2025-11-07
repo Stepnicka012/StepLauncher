@@ -1,0 +1,142 @@
+.PanelsContainer{
+    position: absolute;
+    top: 0;
+    background-color: #0008;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    z-index: 10;
+    transition: background-color .5s, backdrop-filter .5s ease-in-out;
+    content-visibility: visible;
+    &.unvisible{
+        content-visibility: hidden;
+        background-color: transparent;
+        backdrop-filter: none;
+        pointer-events: none;
+        z-index: -10;
+    }
+}
+.Dialog-Item[open="false"]{
+    transform: translateY(-5em);
+    background-color: transparent;
+    border:none;
+    backdrop-filter: none;
+    pointer-events: none;
+    z-index: -10;
+}
+.Dialog-Item[open="true"]{
+    inset: 0;
+    padding: 0;
+    min-width: 35rem;
+    min-height: 20rem;
+    border-radius: 0.5em;
+    background-color: var(--Dialog-Bg);
+    border: 1px solid color-mix(in srgb, var(--Dialog-Bg) 50%, black 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: transform .5s ease-in-out, background-color .5s, backdrop-filter .5s ease-in-out;
+    .TittleDialog{
+        width: 100%;
+        height: 2.5rem;
+        border-bottom: 1px solid color-mix(in srgb, var(--Dialog-Bg) 50%, black 50%);
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        color:white;
+        background-color: color-mix(in srgb, var(--Dialog-Bg) 50%, black 50%);
+        font-family: 'Comfortaa',Arial, Helvetica, sans-serif;
+        font-size: 0.8rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2.5em;
+        overflow: hidden;
+        button{
+            background-color: #222;
+            border: none;
+            padding: 0.5em;
+            width: 3rem;
+            height: 2rem;
+            border-radius: 0.3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 0.5em #2225;
+            transition: box-shadow 1s ease-in-out, background-color .2s ease-in-out;
+            &:hover{
+                background-color: rgb(150, 0, 0);
+                box-shadow: 0 0 0.5em rgb(200, 0, 0);
+            }
+            img{
+                width: 1.5rem;
+            }
+        }
+    }
+    .ContentDialog{
+        flex: 1;
+        width: 100%;
+        padding: 0.5em;
+        .SelectMode{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap:0.5em;
+            width: 100%;
+            height: 3rem;
+            .SelectMode-Item {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                background-color: var(--Button-BG);
+                border: 1px solid var(--Button-BG);
+                padding: 0.5em;
+                transition: width .3s ease-in-out, height .3s ease-in-out, transform .5s ease-in-out;
+                img{
+                    pointer-events: none;
+                    object-fit: cover;
+                    width: 2.5rem;
+                    border-radius: 50%;
+                    transition: width .3s ease-in-out;
+                }
+                p{
+                    position: absolute;
+                    bottom: -5em;
+                    opacity: 0;
+                    transition: bottom .2s ease-in-out, opacity .3s ease-in-out;
+                    padding: 0.5em;
+                    background-color: #000;
+                    color:white;
+                    font-size: 0.8rem;
+                    font-family: 'Comfortaa',Arial, Helvetica, sans-serif;
+                    border-radius: 0.5em;
+                    border: 1px solid aqua;
+                    box-shadow: 0 0 0.5em blue;
+                    pointer-events: none;
+                }
+                &:hover{
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    background-color: color-mix(in srgb, var(--Button-BG) 50%, black 50%);
+                    img{
+                        width: 3rem;
+                    }
+                    p{
+                        opacity: 1;
+                        bottom: -3rem;
+                    }
+                }
+            }
+
+        }
+    }
+}

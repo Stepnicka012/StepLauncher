@@ -1,0 +1,230 @@
+.SelectNew-Menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+    z-index: 35;
+    background-color: #0009;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(35px);
+    background-size: 120% 120%;
+    background-position: 50% 120%;
+    transition:
+        opacity 0.4s ease,
+        transform 0.45s ease,
+        background-position 1s ease;
+
+    /* Estado visible */
+    &.active {
+        pointer-events: all;
+        opacity: 1;
+        transform: translateY(0);
+        background-position: 50% 50%;
+    }
+
+    /* Estado oculto (salida) */
+    &.desactive {
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(40px);
+        background-position: 50% 130%;
+    }
+
+    /* Botón de salida */
+    .ButtonExit {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(40px);
+        background: linear-gradient(145deg, #700, #a00);
+        border-radius: 0.6em;
+        height: 2rem;
+        width: 9rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Comfortaa', Arial, Helvetica, sans-serif;
+        font-size: 0.8rem;
+        color: white;
+        letter-spacing: 0.5px;
+        opacity: 0;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+        transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+
+        /* Animación entrada/salida */
+        .SelectNew-Menu.active & {
+            animation: buttonFadeIn 0.6s 0.6s ease-out forwards;
+        }
+
+        .SelectNew-Menu.desactive & {
+            animation: buttonFadeOut 0.4s ease-in forwards;
+        }
+
+        &:hover {
+            background: linear-gradient(145deg, #a00, #d00);
+            transform: translateX(-50%) translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+        }
+    }
+
+    .CardMenu {
+        position: relative;
+        width: 260px;
+        height: 420px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.6em;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(70px) scale(0.95);
+        animation: none;
+
+        /* Entrada animada escalonada con rebote */
+        .SelectNew-Menu.active & {
+            animation: cardSlideUp 0.75s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        /* Salida */
+        .SelectNew-Menu.desactive & {
+            animation: cardSlideDown 0.5s ease-in forwards;
+        }
+
+        &:nth-child(1) { animation-delay: 0.2s; }
+        &:nth-child(2) { animation-delay: 0.35s; }
+        &:nth-child(3) { animation-delay: 0.5s; }
+
+        h2 {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            padding: 0.5em 0;
+            text-align: center;
+            pointer-events: none;
+            background-color: rgba(0,0,0,0.4);
+            font-family: 'Comfortaa', Arial, Helvetica, sans-serif;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-shadow: 0 0 0.5em #bbb, 0 0 1em black;
+            z-index: 5;
+            backdrop-filter: blur(3px);
+        }
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            image-rendering: -webkit-optimize-contrast;
+            z-index: 1;
+            filter: brightness(0.9);
+            transition: transform 0.35s ease, filter 0.35s ease;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0,0,0,0.1));
+            z-index: 2;
+            transition: opacity 0.35s ease;
+        }
+
+        &:nth-child(1),
+        &:nth-child(3) {
+            transform: scale(0.92);
+            opacity: 0.85;
+        }
+
+        &:nth-child(3) {
+            background-image: url('../../assets/background/10.png');
+            background-position: center;
+            background-attachment: local;
+            background-size: cover;
+
+            img {
+                image-rendering: optimizeQuality;
+                width: 230px;
+                height: 230px;
+                object-fit: cover;
+            }
+        }
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+            img {
+                transform: translate(-50%, -50%) scale(1.07);
+                filter: brightness(1);
+            }
+
+            &::after {
+                opacity: 0.25;
+            }
+        }
+    }
+}
+
+/* === Animaciones === */
+
+@keyframes cardSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(70px) scale(0.92);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-6px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes cardSlideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+}
+
+@keyframes buttonFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes buttonFadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(40px);
+    }
+}

@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./source",
+
+    "module": "nodenext",
+    "target": "esnext",
+    "lib": ["esnext","DOM"],
+    "types": ["node"],
+
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": false,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "skipLibCheck": true,
+    "incremental": true,
+    "noEmitOnError": false,
+    "allowJs": true,
+    "checkJs": false,
+    "removeComments": true,
+    "useDefineForClassFields": false,
+
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "source","public"]
+}

@@ -1,0 +1,50 @@
+{
+    "Launcher": {
+        "tittle": "StepLauncher"
+    },
+    "Connection": {
+        "State-1": "Stable Connection",
+        "State-2": "Medium Connection",
+        "State-3": "Low Connection",
+        "State-4": "No Connection"
+    },
+    "News": {
+        "ViewChangelog": "View Changelog",
+        "Release": "Minecraft Release:",
+        "Snapshot": "Minecraft Snapshot:",
+        "NoDescription": "No description available.",
+        "ConnectionError": "Failed to load news due to connection error.",
+        "ErrorChangelog": "Error loading the changelog",
+        "ExitChangelog": "Exit the Changelog"
+    },
+    "Webview": {
+        "loading": "Loading...",
+        "Noticias": {
+            "Recargar": "Reload",
+            "CargarMas": "Load More",
+            "Ocultar": "Hide News",
+            "Panel": {
+                "StepLauncher": "StepLauncher",
+                "Releases": "Releases",
+                "Snapshots": "Snapshots"
+            }
+        }
+    },
+    "Buttons": {
+        "Console": "Console"
+    },
+    "Sidebar": {
+        "Descripciones": {
+            "Opciones": "Tune StepLauncher and customize your Minecraft",
+            "Instancias": "Create, clone, and organize Minecraft worlds or profiles",
+            "Descarga": "Get any Minecraft version in minutes",
+            "Jugar": "Launch your Minecraft and start the adventure!"
+        },
+        "Texto": {
+            "Opciones": "Settings",
+            "Instancias": "Instances",
+            "Descargar": "Download",
+            "Jugar": "Play"
+        }
+    }
+}

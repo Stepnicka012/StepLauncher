@@ -1,0 +1,428 @@
+@import url('./panels/news.css');
+.Changelog-Container *,
+.News *{
+    content-visibility: auto;
+    contain: layout paint style;
+    backface-visibility: hidden;
+    transform-style:flat;
+    will-change: opacity, transform;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-drag: none;
+    box-sizing: border-box;
+    user-select: none;
+}
+.News{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    scroll-behavior: smooth;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:1rem;
+    background-color: #0005;
+    z-index: 1;
+    padding-bottom: 5rem;
+    overflow: auto;
+    transition: transform .5s ease-in-out, opacity .5s ease-in-out,background .1s ease-in-out;
+    &.unvisible{
+        background-color: transparent;
+        transform: translateY(-1rem);
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.NewsContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.news-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 20rem;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    overflow: hidden;
+    position: relative;
+    transition: height .5s ease-in-out,transform 250ms ease-in,opacity .2s ease-in-out;
+    z-index: 1;
+    &:hover {
+        background-color: #0002;
+        .hero img {
+            filter: grayscale(0%);
+        }
+    }
+    &.unvisible{
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(2rem);
+        .hero img{
+            opacity: 0;
+        }
+    }
+    &:nth-child(1){
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+        height: 100%;
+        .hero{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } 
+        img{
+            position: relative;
+            image-rendering: auto;
+            image-resolution: 600dpi;
+            opacity: 1;
+        }
+    }
+    .hero{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease-in-out,height 0.5s ease-in-out;
+        pointer-events: none;
+        z-index: -1;
+        img{
+            image-rendering: auto;
+            image-resolution: 150dpi;
+            width: 100%;
+            border-radius: 0.5em;
+            object-fit: cover;
+            filter:grayscale(50%);
+            transition: transform 0.8s ease-in-out, width 250ms ease-in,height 0.8s ease-in-out, filter 0.3s ease-in-out;
+        }
+    }
+    .description{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding:0 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        font-family: "Comfortaa";
+        background-color: #0005;
+        font-size: 0.8rem;
+        text-shadow: 0 0 0.5em #0005;
+        transition: height 0.5s ease-in-out;
+        button{
+            position: absolute;
+            bottom: 0.5em;
+            right: 0.5em;
+            border: none;
+            border-radius: 0.5em;
+            padding: 0.5em 1em;
+            background-color: var(--Button-Item-BG);
+            color:white;
+            transition:color .1s ease-in-out,opacity 0.5s ease-in-out,background .2s ease-in-out, box-shadow .5s ease-in-out;
+            &:hover{
+                background-color: color-mix(in srgb, var(--Button-Item-BG) 50%, white 55%);
+                box-shadow: 0 0 1em color-mix(in srgb, var(--Button-Item-BG) 50%, white 65%);
+                color:black;
+            }
+        }
+        #Tittle{
+            position: absolute;
+            bottom: 0.5em;
+            left: 0.5em;
+            font-family: "Comfortaa";
+            font-size: 0.9rem;
+        }
+    }
+}
+
+.Changelog-Container{
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100dvh;
+    background-color: #0008;
+    contain: layout paint style;
+    content-visibility: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+    transition: right .5s ease-in-out;
+    z-index: 10;
+    animation: CloseChangelog .5s ease-in-out forwards;
+    &.ChangelogVisible{
+        animation: OpenChangelog 1s ease-in-out forwards .1s;
+    }
+}
+.changelog-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    margin: auto;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    overflow: hidden; /* evita repaints por overflow-y innecesario */
+    contain: layout paint style;
+    content-visibility: auto;
+    contain-intrinsic-size: 50rem;
+    color: #fff;
+    font-family: 'Comfortaa', sans-serif;
+    line-height: 1.6;
+    transition: transform 0.3s ease;
+    * .lazy {
+        image-rendering: pixelated;
+    }
+    img:not(.lazy) {
+        image-rendering: optimizeSpeed;
+        margin:auto;
+    }
+    
+    .hero {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        margin-bottom: 1rem;
+
+        img {
+            max-width: 25rem;
+            width: 100%;
+            border-radius: 0.5rem;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            &:hover {
+                transform: scale(1.05);
+                filter: brightness(1.1);
+            }
+        }
+    }
+
+    .description {
+        padding: 1rem 0;
+        font-size: 0.95rem;
+        contain: paint;
+        #Tittle {
+            text-align: center;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        #ShortText {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .body-content {
+            content-visibility: auto;
+            contain-intrinsic-size: 40rem;
+            will-change: contents;
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+
+            p {
+                margin-bottom: 1rem;
+            }
+
+            ul, ol {
+                padding-left: 1.5rem;
+                margin-bottom: 1rem;
+
+                li {
+                    margin-bottom: 0.5rem;
+
+                    a {
+                        color: #6ab1f7;
+                        text-decoration: underline;
+
+                        &:hover {
+                            color: #82c0ff;
+                        }
+                    }
+
+                    code {
+                        background-color: #1e1e1e;
+                        padding: 0.2rem 0.4rem;
+                        border-radius: 0.3rem;
+                        font-family: 'Fira Code', monospace;
+                    }
+                }
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 1rem;
+
+                th, td {
+                    border: 1px solid #666;
+                    padding: 0.5rem 1rem;
+                    text-align: left;
+                }
+
+                th {
+                    font-weight: 600;
+                }
+            }
+
+            pre {
+                background: linear-gradient(#1e1e1e 90%,black);
+                padding: 0.8rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+                font-family: 'Fira Code', monospace;
+                margin-bottom: 1rem;
+            }
+
+            blockquote {
+                border-left: 3px solid #6ab1f7;
+                padding-left: 1rem;
+                margin: 1rem 0;
+                color: #ccc;
+                font-style: italic;
+            }
+
+            hr {
+                border: 1px solid #444;
+                margin: 1.5rem 0;
+            }
+
+            img {
+                max-width: 100%;
+                border-radius: 0.5rem;
+                margin: 1rem 0;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        .hero img {
+            max-width: 100%;
+        }
+
+        .description {
+            #Tittle {
+                font-size: 1.1rem;
+            }
+
+            #ShortText {
+                font-size: 0.85rem;
+            }
+
+            .body-content h1 {
+                font-size: 1.2rem;
+            }
+
+            .body-content h2 {
+                font-size: 1rem;
+            }
+
+            .body-content h3 {
+                font-size: 0.95rem;
+            }
+        }
+    }
+}
+
+.Changelog-Container,
+.changelog-item {
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: linear-gradient(180deg, #111, #000);
+        border-radius: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #00D8D2;
+        border-radius: 0;
+        transition: all 0.3s ease;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #00757A;
+        transform: scale(1.1);
+    }
+}
+
+
+.Changelog-Container::-webkit-scrollbar-track,
+.changelog-item::-webkit-scrollbar-track {
+    border-radius: 0;
+}
+
+.Changelog-Container::-webkit-scrollbar-thumb,
+.changelog-item::-webkit-scrollbar-thumb {
+    border-radius: 0;
+}
+
+@keyframes CloseChangelog{
+    0%{
+        right: 0;
+    }
+    100%{
+        right: -100%;
+    }
+}
+@keyframes OpenChangelog{
+    0%{
+        right: -100%;
+    }
+    100%{
+        right: 0%;
+    }
+}
+@media (max-width: 768px) {
+    .News {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    .news-item {
+        height: 15rem;
+        padding: 0.25rem;
+        &:nth-child(1){
+            grid-column: 1 / 1;
+            grid-row: 1 / 1;
+        }
+        .hero img {
+            width: 90%;
+        }
+        .description {
+            height: 7rem;
+            font-size: 0.7rem;
+            #Tittle {
+                font-size: 0.8rem;
+            }
+            button {
+                bottom: 0.25em;
+                right: 0.25em;
+            }
+        }
+    }
+}
