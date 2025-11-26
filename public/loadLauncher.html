@@ -159,13 +159,13 @@
             max-width: 260px;
         }
 
-        .LoaderContainer {
+        .LoaderContainer-Load {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .Loader {
+        .Loader-Load {
             width: 1.2rem;
             height: 1.2rem;
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -197,8 +197,6 @@
                 transform: scale(2);
             }
         }
-    </style>
-    <style>
         .TittleBar-Load{
             position: fixed;
             top: 0;
@@ -240,14 +238,14 @@
                 <h1 id="TextLoadLauncher">Bienvenido</h1>
             </div>
             </div>
-            <div class="LoaderContainer">
-                <span class="Loader"></span>
+            <div class="LoaderContainer-Load">
+                <span class="Loader-Load    "></span>
             </div>
         </div>
     </div>
     <div class="Vignette"></div>
     <div class="TittleBar-Load">
-        <button onclick="document.querySelector('.Dialog').classList.add('visible');"><img src="./assets/svg/window/close.svg"></button>
+        <button onclick="document.querySelector('.Dialog').classList.add('visible');"><img src="./assets/icons/svg/window/close.svg"></button>
     </div>
     <div class="Dialog">
         <div class="DialogBackdrop"></div>
@@ -364,6 +362,6 @@
             box-shadow: 0 0 1em #f33;
         }
     </style>
-    <script type="module" src="../source/renderer/loadLauncher.js"></script>
+    <script type="module" src="../source/Renderer/loadLauncher.js"></script>
 </body>
 </html>

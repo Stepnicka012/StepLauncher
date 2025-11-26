@@ -9,7 +9,7 @@
     "types": ["node"],
 
     "sourceMap": false,
-    "declaration": true,
+    "declaration": false,
     "declarationMap": false,
 
     "strict": true,
@@ -20,7 +20,6 @@
     "noUnusedParameters": true,
 
     "skipLibCheck": true,
-    "incremental": true,
     "noEmitOnError": false,
     "allowJs": true,
     "checkJs": false,
@@ -32,6 +31,6 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "source","public"]
 }

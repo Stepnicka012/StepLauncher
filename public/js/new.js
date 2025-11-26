@@ -1,4 +1,4 @@
-const elements = {
+const el = {
     selectNewBtn: document.getElementById("SelectNew"),
     selectNewsBt: document.getElementById("SelectNews-Bt"),
     selectNewMenu: document.querySelector(".SelectNew-Menu"),
@@ -7,50 +7,55 @@ const elements = {
     loadMoreBtn: document.getElementById("LoadMore")
 };
 
-let useNewPanel = false;
+// === Estado interno ===
+let translations = null;
+let translationsReady = false;
+let lastConnectionState = null;
+let lastCheckTime = 0;
+let isChecking = false;
+let lastUserInteraction = Date.now();
 
+// Constantes
+const MIN_CHECK_INTERVAL = 15000;  // 15s
+const MAX_IDLE_TIME = 120000;      // 2min
+
+// Funciones de UI
 function toggleNewsButtons(visible) {
-    [elements.selectNewsBt, elements.loadMoreBtn].forEach(btn => {
-        if (!btn) return;
-        btn.classList.toggle("hidden", !visible);
-    });
+    [el.selectNewsBt, el.loadMoreBtn].forEach(btn => btn?.classList.toggle("hidden", !visible));
 }
 
 function togglePanel() {
-    if (!elements.selectNewMenu) return;
-    const isActive = elements.selectNewMenu.classList.contains("active");
-    elements.selectNewMenu.classList.toggle("active", !isActive);
-    elements.selectNewMenu.classList.toggle("desactive", isActive);
-    elements.selectNewsBt?.classList.toggle("active", !isActive);
+    if (!el.selectNewMenu) return;
+    const isActive = el.selectNewMenu.classList.contains("active");
+    el.selectNewMenu.classList.toggle("active", !isActive);
+    el.selectNewMenu.classList.toggle("desactive", isActive);
+    el.selectNewsBt?.classList.toggle("active", !isActive);
 }
 
-elements.selectNewMenu?.classList.add("desactive");
+// Listeners de panel
+el.selectNewMenu?.classList.add("desactive");
 
-elements.selectNewBtn?.addEventListener("click", e => {
+el.selectNewBtn?.addEventListener("click", e => {
     e.stopPropagation();
     togglePanel();
 });
 
 document.addEventListener("click", e => {
-    if (!elements.selectNewMenu?.contains(e.target) && e.target !== elements.selectNewBtn) {
-        elements.selectNewMenu?.classList.remove("active");
-        elements.selectNewMenu?.classList.add("desactive");
-        elements.selectNewsBt?.classList.remove("active");
+    if (!el.selectNewMenu?.contains(e.target) && e.target !== el.selectNewBtn) {
+        el.selectNewMenu?.classList.remove("active");
+        el.selectNewMenu?.classList.add("desactive");
+        el.selectNewsBt?.classList.remove("active");
     }
 });
 
-elements.selectNewMenu?.querySelector(".ButtonExit")?.addEventListener("click", () => {
-    elements.selectNewMenu?.classList.remove("active");
-    elements.selectNewMenu?.classList.add("desactive");
+el.selectNewMenu?.querySelector(".ButtonExit")?.addEventListener("click", () => {
+    el.selectNewMenu?.classList.remove("active");
+    el.selectNewMenu?.classList.add("desactive");
 });
 
-// ---- Traducciones ----
-let translations = null;
-let translationsReady = false;
-
+// Traducciones
 window.addEventListener("message", event => {
-    if (!event.data?.type) return;
-    if (event.data.type === "applyTranslations") {
+    if (event.data?.type === "applyTranslations") {
         translations = event.data.translations;
         if (!translations) return;
         translationsReady = true;
@@ -60,64 +65,33 @@ window.addEventListener("message", event => {
 
 function applyTranslationsToDOM() {
     if (!translations) return;
-    document.querySelectorAll("[data-lang]").forEach(el => {
-        const key = el.getAttribute("data-lang");
-        if (key && translations[key]) el.textContent = translations[key];
+    document.querySelectorAll("[data-lang]").forEach(elm => {
+        const key = elm.getAttribute("data-lang");
+        if (key && translations[key]) elm.textContent = translations[key];
     });
 }
 
-window.parent.postMessage({ type: "webview-ready" }, "*");
-
-// ---- Estado de conexión ----
+// Estado de conexión
 function updateConnection(status) {
     if (!translationsReady) return;
-    const { wifiIcon, wifiText } = elements;
-    switch (status) {
-        case 0:
-            wifiIcon.src = "../assets/svg/wifi/wifi_noConnection.svg";
-            wifiText.textContent = translations["Connection.State-4"] ?? "Sin conexión";
-            break;
-        case 1:
-            wifiIcon.src = "../assets/svg/wifi/wifi_1_bar.svg";
-            wifiText.textContent = translations["Connection.State-3"] ?? "Conexión baja";
-            break;
-        case 2:
-            wifiIcon.src = "../assets/svg/wifi/wifi_2_bar.svg";
-            wifiText.textContent = translations["Connection.State-2"] ?? "Conexión media";
-            break;
-        case 3:
-        default:
-            wifiIcon.src = "../assets/svg/wifi/wifi_3_bar.svg";
-            wifiText.textContent = translations["Connection.State-1"] ?? "Conexión estable";
-            break;
-    }
+    const { wifiIcon, wifiText } = el;
+
+    const state = {
+        0: ["../assets/Icons/Svg/Wifi/Wifi_Problem.png", "Connection.State-0", "Sin conexión"],
+        1: ["../assets/Icons/Svg/Wifi/Wifi_None.png", "Connection.State-1", "Conexión muy baja"],
+        2: ["../assets/Icons/Svg/Wifi/Wifi_Low.png", "Connection.State-2", "Conexión baja"],
+        3: ["../assets/Icons/Svg/Wifi/Wifi_Medium.png", "Connection.State-3", "Conexión media"],
+        4: ["../assets/Icons/Svg/Wifi/Wifi_High.png", "Connection.State-4", "Conexión estable"]
+    };
+
+    const [src, key, fallback] = state[status] ?? state[3];
+    wifiIcon.src = src;
+    wifiText.textContent = translations[key] ?? fallback;
 }
 
-// ---- Comprobación de conexión inteligente ----
-let lastConnectionState = null;
-let lastCheckTime = 0;
-let isChecking = false;
-const MIN_CHECK_INTERVAL = 30000;
-const MAX_IDLE_TIME = 180000;
-
-async function smartCheckConnection(force = false) {
-    const now = Date.now();
-    if (isChecking || (!force && now - lastCheckTime < MIN_CHECK_INTERVAL)) return;
-    isChecking = true;
-    try {
-        const prevState = lastConnectionState;
-        const newState = await testConnectionInternal();
-        if (newState !== prevState) {
-            updateConnection(newState);
-            toggleNewsButtons(newState !== 0);
-        }
-        lastConnectionState = newState;
-        lastCheckTime = now;
-    } finally { isChecking = false; }
-}
-
+// Comprobación de conexión
 async function testConnectionInternal() {
-    const url = "https://launchercontent.mojang.com/v2/javaPatchNotes.json?" + Date.now();
+    const url = `https://launchercontent.mojang.com/v2/javaPatchNotes.json?${Date.now()}`;
     const start = performance.now();
     try {
         const response = await fetch(url, { method: "HEAD", cache: "no-store" });
@@ -131,6 +105,28 @@ async function testConnectionInternal() {
     }
 }
 
+async function smartCheckConnection(force = false) {
+    const now = Date.now();
+    if (isChecking || (!force && now - lastCheckTime < MIN_CHECK_INTERVAL)) return;
+
+    isChecking = true;
+    try {
+        const prev = lastConnectionState;
+        const newState = await testConnectionInternal();
+
+        if (newState !== prev) {
+            updateConnection(newState);
+            toggleNewsButtons(newState !== 0);
+        }
+
+        lastConnectionState = newState;
+        lastCheckTime = now;
+    } finally {
+        isChecking = false;
+    }
+}
+
+// Manejo de conexión nativa
 window.addEventListener("online", () => smartCheckConnection(true));
 window.addEventListener("offline", () => {
     lastConnectionState = 0;
@@ -138,10 +134,48 @@ window.addEventListener("offline", () => {
     toggleNewsButtons(false);
 });
 
+// Sistema de actividad
+["mousemove", "keydown", "click"].forEach(evt =>
+    document.addEventListener(evt, () => (lastUserInteraction = Date.now()))
+);
+
+// Intervalo de comprobación inteligente
 setInterval(() => {
     const now = Date.now();
-    if (now - lastCheckTime > MAX_IDLE_TIME) smartCheckConnection(true);
-    else smartCheckConnection(false);
-}, 10000);
+    const idleTime = now - lastUserInteraction;
 
+    if (idleTime > MAX_IDLE_TIME) {
+        if (now - lastCheckTime > MAX_IDLE_TIME * 1.5) smartCheckConnection(true);
+    } else {
+        smartCheckConnection(false);
+    }
+}, 20000);
+
+// Inicialización del iframe
+function initIframe() {
+    window.addEventListener("message", event => {
+        if (event.data?.type !== "applyTranslations") return;
+
+        const { translations, visualAssets } = event.data;
+        if (translations) applyTranslationsToDOM(translations);
+
+        if (visualAssets) {
+            const setImage = (id, src) => {
+                const img = document.getElementById(id);
+                if (img instanceof HTMLImageElement && src) img.src = src;
+            };
+            setImage("snapshotsImg", visualAssets.Snapshots);
+            setImage("releasesImg", visualAssets.Releases);
+            setImage("steplauncherImg", visualAssets.StepLauncher);
+        }
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(()=>{
+            window.parent.postMessage({ type: "iframe-ready" }, "*");
+        },500);
+    });
+}
+
+initIframe();
 smartCheckConnection(true);

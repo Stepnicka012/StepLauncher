@@ -30,7 +30,7 @@ Creemos en un launcher **hecho por la comunidad, para la comunidad**, donde cada
 <p align="center">
   <img align="center" width="200px" src="./docs/images/Discord.gif">
   <p align="center">
-    <a href="https://discord.gg/37dYy9apwE" target="_blank">
+    <a href="https://discord.gg/YAqpTWQByM" target="_blank">
       <img src="https://img.shields.io/badge/Únete%20al%20Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Únete a Discord">
     </a>
   </p>

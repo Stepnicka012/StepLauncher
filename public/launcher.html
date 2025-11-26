@@ -13,15 +13,28 @@
             <img src="./assets/icon.png" alt="StepLauncher.png">
             <h4>StepLauncher</h4>
         </div>
+        <div class="Music-Card unvisible">
+            <div class="CoverArt"><img src="./assets/Test-Music.png" alt="Image.png" loading="lazy"></div>
+            <div class="TittleMusic">
+                <p>CALA BOCA PXTA (Slowed)</p>
+                <p id="Author">Autor : 2KE;</p>
+            </div>
+            <div class="ButtonExpandMusic">
+                <img src="./assets/icons/Arrow/Caret_Down_SM.png" loading="lazy">
+            </div>
+        </div>
         <div class="TittleButton">
-            <button id="minBtn"><img src="./assets/svg/window/remove-and-minized.svg" loading="lazy"></button>
-            <button id="maxBtn"><img src="./assets/svg/window/window-1.svg" id="maxIcon" loading="lazy"></button>
-            <button id="closeBtn"><img src="./assets/svg/window/close.svg" loading="lazy"></button>
+            <button id="minBtn"><img src="./assets/icons/svg/window/remove-and-minized.svg" loading="lazy"></button>
+            <button id="maxBtn"><img src="./assets/icons/svg/window/window-1.svg" id="maxIcon" loading="lazy"></button>
+            <button id="closeBtn"><img src="./assets/icons/svg/window/close.svg" loading="lazy"></button>
         </div>
     </div>
+    <div class="Music-Popup">
+        <iframe src="./html/MusicPopup.html" frameborder="0"></iframe>
+    </div>
     <div class="BackgroundVideo" tabindex="-1">
-        <video autoplay loop muted>
-            <source src="">
+        <video autoplay loop id="VideoConfig">
+            <source src="" id="VideoSource">
         </video>
     </div>
     <div class="LoaderProgram">
@@ -40,33 +53,45 @@
     </div>
     <main class="App-Content">
         <div class="Sidebar">
+            <div class="Sidebar-Button" id="Sidebar-Button"><img src="./assets/icons/Svg/Other/panel.svg"></div>
+            <button id="scrollToggle"> <p class="Description" data-lang="Buttons.Console"></p> <img src="./assets/icons/svg/other/arrow.svg"></button>
             <!--  -->
-            <div class="Sidebar-Item">
+            <div class="Sidebar-Item" data-OpenPanel="settings">
                 <div class="Description">
                     <span data-lang="Sidebar.Descripciones.Opciones"></span>
                 </div>
                 <div class="Content-Item">
-                    <img src="./assets/svg/menu/settings.svg" alt="Settings" loading="lazy">
+                    <img src="./assets/icons/svg/menu/settings.svg" alt="Settings" loading="lazy">
                     <p data-lang="Sidebar.Texto.Opciones"></p>
                 </div>
             </div>
+            <!--  -->
+            <!-- <div class="Sidebar-Item" data-OpenPanel="music">
+                <div class="Description">
+                    <span data-lang="Sidebar.Descripciones.Musica"></span>
+                </div>
+                <div class="Content-Item">
+                    <img src="./assets/icons/Media/Play_Circle.png" alt="Settings" loading="lazy">
+                    <p data-lang="Sidebar.Texto.Musica"></p>
+                </div>
+            </div> -->
             <!--  -->
             <div class="Sidebar-Item">
                 <div class="Description">
                     <span data-lang="Sidebar.Descripciones.Instancias"></span>
                 </div>
                 <div class="Content-Item">
-                    <img src="./assets/svg/menu/instancies.svg" alt="Instancies" loading="lazy">
+                    <img src="./assets/icons/svg/menu/instancies.svg" alt="Instancies" loading="lazy">
                     <p data-lang="Sidebar.Texto.Instancias"></p>
                 </div>
             </div>
             <!--  -->
-            <div class="Sidebar-Item">
+            <div class="Sidebar-Item" data-openDialogPanel="download">
                 <div class="Description">
                     <span data-lang="Sidebar.Descripciones.Descarga"></span>
                 </div>
                 <div class="Content-Item">
-                    <img src="./assets/svg/menu/download.svg" alt="Download" loading="lazy">
+                    <img src="./assets/icons/svg/menu/download.svg" alt="Download" loading="lazy">
                     <p data-lang="Sidebar.Texto.Descargar"></p>
                 </div>
             </div>
@@ -76,76 +101,193 @@
                     <span data-lang="Sidebar.Descripciones.Jugar"></span>
                 </div>
                 <div class="Content-Item">
-                    <img src="./assets/svg/menu/game.svg" alt="Play" loading="lazy">
+                    <img src="./assets/icons/svg/menu/game.svg" alt="Play" loading="lazy">
                     <p data-lang="Sidebar.Texto.Jugar"></p>
                 </div>
             </div>
             <!--  -->
         </div>
         <div class="Content">
-            <div class="Hotbar">
-                <button id="scrollToggle"> <p class="Description" data-lang="Buttons.Console"></p> <img src="./assets/svg/others/arrow.svg"></button>
-            </div>
             <div class="Container_Content">
                 <section id="ContentNews">
-                    <div class="WebviewContainer">
-                        <webview src="./html/news.html" preload="./webview/news.js">
-                        </webview>
-                        <h4 class="WebViewIndicatorContainer">
-                            <p class="WebviewLoader"></p>
-                            <div class="WebViewIndicator"></div>
+                    <div class="IframeContainer">
+                        <iframe src="./html/news.html" tabindex="-1" loading="lazy"></iframe>
+                        <h4 class="IframeIndicatorContainer">
+                            <p class="IframeLoader"></p>
+                            <div class="IframeIndicator"></div>
                         </h4>
                     </div>
                 </section>
                 <section id="ContentBackend">
+                    <div class="LOGS_CONTAINER">
+                        <div class="Tittle">
+                            <div>
+                                <label id="TittleLogs">Descargando Minecraft 1.21.10</label>
+                            </div>
+                            <div>
+                                <label id="Network:Porcentaje">Porcentaje de Descarga: 0% / 100%</label>
+                                <hr>
+                                <label id="Network:TotalCalculate">Total: 0 MB</label>
+                                <hr>
+                                <label id="Network:MB">Descargado: 0 MB</label>
+                                <hr>
+                                <label id="Network:Velocity">Velocidad: 0 MB/s</label>
+                                <hr>
+                                <label id="Network:SectionDone">Sección: Ninguna</label>
+                            </div>
+                        </div>
+                        <div class="Logs"></div>
+                    </div>
                 </section>
             </div>
         </div>
-        <!-- <div class="PanelsContainer">
-            <dialog class="Dialog-Item" open="true">
+        <div class="PanelsContainer unvisible">
+            <div class="PanelsContainer-HTML unvisible" tabindex="1">
+            </div>
+            <dialog class="Dialog-Item" open="false" data-dialogType="download">
                 <div class="TittleDialog">
                     <div><h3>Descargar</h3></div>
-                    <button><img src="./assets/svg/window/close.svg"></button>
+                    <button data-dialogClose="download"><img src="./assets/icons/svg/window/close.svg"></button>
                 </div>
                 <div class="ContentDialog">
-                    <div class="SelectMode">                        
-                        <div class="SelectMode-Item"><img src="./assets/icons/grass_block.png" loading="lazy"><p>Release</p></div>
-                        <div class="SelectMode-Item"><img src="./assets/icons/dirt.png" loading="lazy"><p>Snapshots</p></div>
-                        <div class="SelectMode-Item"><img src="./assets/icons/forge.png" loading="lazy"><p>Forge</p></div>
-                        <div class="SelectMode-Item"><img src="./assets/icons/neoforge.png" loading="lazy"><p>NeoForge</p></div>
-                        <div class="SelectMode-Item"><img src="./assets/icons/optifine.png" loading="lazy"><p>Optifine</p></div>
-                        <div class="SelectMode-Item"><img src="./assets/icons/quilt.png" loading="lazy"><p>Quilt</p></div>
-                        <div class="SelectMode-Item"><img src="./assets/icons/legacyfabric.png" loading="lazy"><p>LegacyFabric</p></div>
-                        <div class="SelectMode-Item"><img src="./assets/icons/fabric.png" loading="lazy"><p>Fabric</p></div>
+                    <div class="ActiveDownload Unvisible">
+                        <img src="./assets/gif/loading.gif" alt="Descargando.gif">
+                        <p>Descargando Minecraft...</p>
+                    </div>
+                    <div class="SelectMode">
+                        <!-- <div class="SelectMode-Item">
+                            <div class="Image"><img src="./assets/icons/forge.png"></div>
+                            <div class="Text"><label data-lang="Buttons.Forge"></label></div>
+                        </div>
+                        <div class="SelectMode-Item">
+                            <div class="Image"><img src="./assets/icons/neoforge.png"></div>
+                            <div class="Text"><label data-lang="Buttons.NeoForged"></label></div>
+                        </div> -->
+                        <div class="SelectMode-Item">
+                            <div class="Image"><img src="./assets/icons/grass_block.png"></div>
+                            <div class="Text"><label data-lang="Buttons.Vanilla"></label></div>
+                        </div>
+                        <!-- <div class="SelectMode-Item">
+                            <div class="Image"><img src="./assets/icons/fabric.png"></div>
+                            <div class="Text"><label data-lang="Buttons.Fabric"></label></div>
+                        </div>
+                        <div class="SelectMode-Item">
+                            <div class="Image"><img src="./assets/icons/legacyfabric.png"></div>
+                            <div class="Text"><label data-lang="Buttons.LegacyFabric"></label></div>
+                        </div> -->
+                    </div>
+                    <div class="DownloadButtonDialog">
+                        <p>Descargar</p>
+                    </div>
+                    <div class="DownloadSectionDialog">
+                        <div class="VanillaDownload">
+                            <div class="SelectVersionMode">
+                                <div id="Releases">
+                                    <div class="Check Selected"></div>
+                                    <label>Vanilla</label>
+                                </div>
+                                <div id="Snapshot">
+                                    <div class="Check"></div>
+                                    <label>Snapshots</label>
+                                </div>
+                                <div id="Beta">
+                                    <div class="Check"></div>
+                                    <label>Beta</label>
+                                </div>
+                                <div id="Alpha">
+                                    <div class="Check"></div>
+                                    <label>Alpha</label>
+                                </div>
+                            </div>
+                            <div class="SelectVersion">
+                                <!-- Versiones a cargar -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </dialog>
-        </div> -->
+        </div>
     </main>
-    <script src="../source/renderer/global.js" type="module"></script>
-    <script>
-        const container = document.querySelector('.Container_Content');
-        const button = document.getElementById('scrollToggle');
+    <audio src="" id="MusicAudio"></audio>
+    <script src="../source/Renderer/Global.js" type="module"></script>
+    <script type="module">
+        // import { initMinecraftLogger } from "./js/download.js";
+        // setTimeout(()=>{
+        //     initMinecraftLogger("1.12.2");            
+        // },10000)
+        const container = document.querySelector('.Container_Content'),
+            button = document.getElementById('scrollToggle'),
+            title = document.querySelector('.TittleMusic p:first-child'),
+            musicCards = document.querySelectorAll('.Music-Card'),
+            musicPopup = document.querySelector('.Music-Popup'),
+            btn = document.getElementById('Sidebar-Button'),
+            sidebar = document.querySelector('.Sidebar');
+
+        btn.addEventListener('click', () => sidebar.classList.toggle('Sidebar-Hidden'));
+
+        if (title && title.parentElement) {
+            const duration = (title.scrollWidth + title.parentElement.offsetWidth) / 50;
+            title.style.animation = `scrollText ${duration}s linear infinite`;
+        }
+
+        if (musicPopup) musicCards.forEach(card => card.addEventListener('click', () => musicPopup.classList.toggle('active')));
 
         const updateButtonClass = () => {
-            if (container.scrollTop === 0) {
-                button.classList.remove('active');
-            } else if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-                button.classList.add('active');
-            }
+            if (!container || !button) return;
+            button.classList.toggle('active', container.scrollTop + container.clientHeight >= container.scrollHeight);
         };
 
-        button.addEventListener('click', () => {
-            if (container.scrollTop === 0) {
-                container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
-                button.classList.add('active');
-            } else {
-                container.scrollTo({ top: 0, behavior: 'smooth' });
-                button.classList.remove('active');
+        if (button && container) {
+            button.addEventListener('click', () => {
+                const top = container.scrollTop === 0 ? container.scrollHeight : 0;
+                container.scrollTo({ top, behavior: 'smooth' });
+                button.classList.toggle('active', top !== 0);
+            });
+            container.addEventListener('scroll', updateButtonClass);
+        }
+
+        const openDialogByType = key => {
+            const panels = document.querySelectorAll('.PanelsContainer');
+            const dialogs = document.querySelectorAll('[data-dialogType]');
+            dialogs.forEach(d => {
+                if (d.dataset.dialogtype === key) {
+                    d.setAttribute('open', 'true');
+                } else {
+                    d.removeAttribute('open');
+                }
+            });
+            panels.forEach(p => p.classList.remove('unvisible'));
+        };
+
+
+        const closeDialogByType = key => {
+            const panels = document.querySelectorAll('.PanelsContainer');
+            const dialogs = document.querySelectorAll('[data-dialogType]');
+            dialogs.forEach(d => d.dataset.dialogtype === key && (d.open = false));
+            panels.forEach(p => p.classList.add('unvisible'));
+        };
+
+        document.addEventListener('click', e => {
+            const closeTarget = e.target.closest('[data-dialogClose]');
+            if (closeTarget) {
+                closeDialogByType(closeTarget.dataset.dialogclose);
+                return;
+            }
+
+            const openPanelTarget = e.target.closest('[data-openDialogPanel]');
+            if (openPanelTarget) {
+                openDialogByType(openPanelTarget.dataset.opendialogpanel);
+                return;
+            }
+
+            const panels = document.querySelectorAll('.PanelsContainer');
+            const dialogItems = document.querySelectorAll('.Dialog-Item');
+
+            if (![...dialogItems, ...panels].some(el => el.contains(e.target))) {
+                panels.forEach(p => p.classList.add('unvisible'));
+                dialogItems.forEach(d => d.open = false);
             }
         });
-
-        container.addEventListener('scroll', updateButtonClass);
     </script>
 </body>
 </html>

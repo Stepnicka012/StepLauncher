@@ -1,5 +1,5 @@
 @import url('./global.css');
-@import url('./panel/launcher.css');
+@import url('./panels/launcher.css');
 .Sidebar{
     position: relative;
     min-width: 15rem;
@@ -12,7 +12,80 @@
     z-index: 5;
     transition: transform 0.5s ease-in-out;
     &.Sidebar-Hidden{
+        transform: translateX(-100%);
+    }
+    &.Sidebar-HiddenToPanel{
         transform: translateX(-150%);
+    }
+    #scrollToggle{
+        position: absolute;
+        bottom: .5rem;
+        right: -3rem;
+        width: 2rem;
+        height: 2rem;
+        border: none;
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0,0.5);
+        color: white;
+        text-shadow: 0 0 0.5em #000;
+        box-shadow: 0 0 0.5em #0005;
+        backdrop-filter: blur(15px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        transition: border .1s ease-in-out, width .1s ease-in-out, background .1s ease-in-out, shadow 1s ease-in-out;
+        border: 1px solid transparent;
+        box-shadow: 0 0 0.5em transparent;
+        cursor: pointer;
+        &.active img{
+            rotate: 180deg;
+        }
+        img{
+            border-radius: 0.5em;
+            width: 3rem;
+            transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        &:hover{
+            background-color: #0009;
+            border: 1px solid var(--Border-Neon);
+            box-shadow: 0 0 0.5em var(--Border-Shadow);
+            .Description{
+                top: -3rem;
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+        .Description{
+            position: absolute;
+            top: -5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0005;
+            padding: 0.4em;
+            border-radius: 0.5em;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .3s cubic-bezier(0.075, 0.82, 0.165, 1),top .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    }
+    .Sidebar-Button{
+        position:absolute;
+        top:.5rem;
+        right:-2.5rem;
+        width: 2rem;
+        height: 2rem;
+        background-color: #0008;
+        backdrop-filter: blur(4px);
+        border-radius: 0.5em;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        img{
+            pointer-events: none;
+            width: 1.5rem;
+        }
     }
     .Sidebar-Item{
         position: relative;
@@ -80,77 +153,18 @@
     }
 }
 .Content{
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     display: flex;
     position: relative;
     overflow-y: auto;
     overflow-x: auto;
+    content-visibility: auto;
     z-index: 1;
-    button{
-        position: relative;
-        width: 2rem;
-        height: 2rem;
-        border: none;
-        border-radius: 50%;
-        background-color: rgb(0, 0, 0,0.5);
-        color: white;
-        text-shadow: 0 0 0.5em #000;
-        box-shadow: 0 0 0.5em #0005;
-        backdrop-filter: blur(15px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: border .1s ease-in-out, width .2s ease-in-out, background .2s ease-in-out, shadow 2s ease-in-out;
-        border: 1px solid transparent;
-        box-shadow: 0 0 0.5em transparent;
-        cursor: pointer;
-        &.active img{
-            rotate: 180deg;
-        }
-        img{
-            border-radius: 0.5em;
-            width: 4.5rem;
-            transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        &:hover{
-            background-color: #0009;
-            border: 1px solid var(--Border-Neon);
-            box-shadow: 0 0 0.5em var(--Border-Shadow);
-            .Description{
-                top: -3rem;
-                visibility: visible;
-                opacity: 1;
-            }
-        }
-        .Description{
-            position: absolute;
-            top: -5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #0005;
-            padding: 0.4em;
-            border-radius: 0.2em;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 3s cubic-bezier(0.075, 0.82, 0.165, 1),top .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-    }
-    .Hotbar{
-        position: absolute;
-        bottom: 0.5em;
-        left: 2rem;
-        min-width: 3rem;
-        min-height: 3rem;
-        border-radius: 0.5em;
-        padding: 0.2em 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5em;
+    transition: left 1s ease-in-out, opacity .5s ease-in-out;
+    &.unvisible{
+        left: 100%;
+        opacity: 0;
     }
 }
 .Container_Content{
@@ -166,11 +180,59 @@
     section{
         margin: 0;
         padding: 0;
-        min-height: 100dvh;
         width: 100%;
     }
 }
-
+section#ContentNews{
+    min-height: 100dvh;
+}
 section#ContentBackend{
-    background-color: #1118; 
+    min-height: calc(100dvh - 2.2rem);
+    background-color: #1118;
+    margin-top:2.2rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .LOGS_CONTAINER{
+        position: absolute;
+        bottom:0;
+        right:0;
+        width: 95%;
+        height: 100%;
+        margin: auto;
+        font-family: Nunito,Arial, Helvetica,sans-serif;
+        color:white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .Tittle{
+            width: 100%;
+            height: 2rem;
+            font-family: Comfortaa,Arial, Helvetica, sans-serif;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            font-size: 0.7rem;
+            div{
+                display:inline-flex;
+                gap: 0.3em;
+                height: 100%;
+                align-items: center;
+                hr{
+                    margin: 0 0.5rem;
+                    height: 100%;
+                    border: 1px solid rgb(255,255,255,0.5);
+                }
+            }
+        }
+        .Logs{
+            width: 100%;
+            height: calc(100% - 2rem);
+            /* font-family: Nunito,Arial, Helvetica,sans-serif;
+            color:white; */
+        }
+    }
 }

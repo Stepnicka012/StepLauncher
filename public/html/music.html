@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="./css/panels/music.css">
+<div class="Music-Body">
+    <div class="Music-Tittle">
+        <div class="Tittle"><h1 data-lang="Musica.Tittle">Musica</h1></div>
+    </div>
+    <div class="Music-Content">
+        <div class="Music-ContentLoad">
+            <div class="Music-Sidebar">
+                <!--  -->
+                <div class="Music-Search-Item">
+                    <img src="./assets/icons/Png/Home.png">
+                    <label>Inicio</label>
+                </div>
+                <!--  -->
+                <div class="Music-Search-Item">
+                    <img src="./assets/icons/Png/Library.png">
+                    <label>Biblioteca</label>
+                </div>
+                <!--  -->
+                <div class="Music-Search-Item">
+                    <img src="./assets/icons/Media/Playlist.png">
+                    <label>Biblioteca</label>
+                </div>
+                <!--  -->
+                <div class="Music-Search-Item">
+                    <img src="./assets/icons/Media/Playlist.png">
+                    <label>Cola actual</label>
+                </div>
+                <!--  -->
+                <div class="Music-Search-Item">
+                    <img src="./assets/icons/Png/Desktop.png">
+                    <label>Local</label>
+                </div>
+                <!--  -->
+                <div class="Music-Search-Item" data-ClosePanel="music">
+                    <img src="./assets/icons/Arrow/Caret_Left_SM.png">
+                    <label>Volver a Inicio</label>
+                </div>
+                <!--  -->
+            </div>
+            <div class="Music-ContentMusic">
+                <div class="Music-Search">
+                    <div class="Music-InputSearch">
+                        <input type="text" id="InputSearchForMusic">
+                        <label data-lang="Musica.SearchLabel" id="LabelSearchMusic"></label>
+                    </div>
+                    <div class="Music-ButtonSearch"><img src="./assets/icons/Png/Search.png" alt=""></div>
+                    <div class="Music-ButtonReload"><img src="./assets/icons/Arrow/Arrows_Reload_01.png" alt=""></div>
+                </div>
+                <div class="Music-ContentLoadMusic">
+                    <div class="Music-Card-Container" id="Music-Container">
+                        <div style="height: 100%;width: 100%; font-family: Comfortaa,Arial, Helvetica, sans-serif; display: flex;justify-content: center;flex-direction: column; align-items: center;">
+                            <img src="./assets/icon.webp" width="50px">
+                            <p>Empieza a buscar algo!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Como odio pensar una nueva clase que sea original para no interferir con todas las otras clases -->
+        </div>
+        <div class="Music-Hotbar">
+            <div class="MusicLineReproductor desactive">
+                <p id="Range1">00:00:00</p>
+                <input type="range" max="100" min="0" id="MusicRange" value="0">
+                <p id="Range2">00:00:00</p>
+            </div>
+            <div class="CoverArt">
+                <img src="./assets/icons/media/Thumbail-Music.png" alt="">
+                <div>
+                    <h1>6arelyhuman  Faster N Harder w asteria  kets4eki Official Lyric Video</h1>
+                </div>
+            </div>
+            <div class="ControlsMusic">
+                <div class="Random"><img src="./assets/icons/Media/random-off.png" loading="lazy"></div>
+                <div class="ControlButtons">
+                    <div><img loading="lazy" src="./assets/icons/Arrow/Arrow_Circle_Left.png"></div>
+                    <div><img loading="lazy" src="./assets/icons/Media/Play_Circle.png"></div>
+                    <div><img loading="lazy" src="./assets/icons/Arrow/Arrow_Circle_Right.png"></div>
+                </div>
+                <div class="Repeat"><img src="./assets/icons/Media/repeat-off.png" loading="lazy"></div>
+            </div>
+            <div class="Settings">
+                <div>
+                    <label>Volumen</label>
+                    <input type="range" id="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

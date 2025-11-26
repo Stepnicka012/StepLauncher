@@ -1,18 +1,16 @@
 {
   "name": "steplauncher",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "StepLauncher: launcher moderno y potente para Minecraft con soporte de modpacks, mods, instancias, etc...",
-  "main": "./source/app.js",
+  "main": "./source/App.js",
   "type": "module",
   "private": true,
   "scripts": {
     "start": "electron .",
     "dev": "npm run build:tsc && electron .",
     "build:tsc": "tsc",
-    "typescript:launcher": "tsc -p tsconfig.json",
-    "typescript:preload": "tsc -p tsconfig.preload.json",
     "build:tsc:watch": "tsc -w",
-    "build:preloads": "tsc -p tsconfig.preload.json",
+    "build:zip": "npm run build:tsc && electron-builder --win zip",
     "build:windows": "npm run build:tsc && electron-builder --win",
     "build:linux": "npm run build:tsc && electron-builder --linux",
     "build:all": "npm run build:tsc && electron-builder"
@@ -44,14 +42,23 @@
   "author": "StepnickaSantiago <stepnicka012@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/node": "^24.5.2",
-    "electron": "^38.4.0",
-    "electron-builder": "^26.0.12",
+    "@types/discord-rpc": "^4.0.10",
+    "@types/node": "24.5.2",
+    "@types/yt-search": "^2.10.3",
+    "electron": "38.4.0",
+    "electron-builder": "26.0.12",
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "electron-log": "5.4.3",
+    "electron-updater": "6.6.2",
+    "ffmpeg-static": "^5.3.0",
     "fs-extra": "^11.3.2",
-    "pino": "^10.1.0"
+    "music-metadata": "^11.10.3",
+    "pino": "10.1.0",
+    "youtube-dl-exec": "^3.0.26",
+    "youtube-search-api": "^2.0.1"
   },
   "build": {
     "appId": "com.novastep.steplauncher",
@@ -59,8 +66,15 @@
     "asar": false,
     "directories": {
       "buildResources": "public/**/*",
-      "output": "Release/${productName}-${version}-${author}-${platform}-${arch}"
+      "output": "Release/${productName}-${version}-${platform}-${arch}"
     },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Stepnicka012",
+        "repo": "StepLauncher"
+      }
+    ],
     "files": [
       "public/**/*",
       "source/**/*",
@@ -71,6 +85,12 @@
       "target": [
         {
           "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
           "arch": [
             "x64"
           ]

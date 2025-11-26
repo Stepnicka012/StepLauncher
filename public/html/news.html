@@ -66,7 +66,7 @@
         position: fixed;
         top: 0.5em;
         right: 0.5em;
-        background-color: #0009;
+        background-color: #000;
         width: 1.5rem;
         height: 1.5rem;
         border-radius: 50%;
@@ -91,7 +91,7 @@
             bottom: -3rem;
             left:10rem;
             font-size: 0.8em;
-            background-color: #0009;
+            background-color: #111;
             padding: 0.5em;
             min-width: 15rem;
             border-radius: 0.5em;
@@ -128,7 +128,7 @@
 </style>
 <div class="NewsContainer">
     <div class="Connection">
-        <img id="wifi-icon" src="../assets/svg/wifi/wifi_3_bar.svg" alt="wifi.svg">
+        <img id="wifi-icon" src="../assets/icons/svg/wifi/Wifi_High.png" alt="wifi.svg">
         <p id="wifi-text" class="Text">Conexión Estable</p>
     </div>
     <div class="News">
@@ -138,22 +138,22 @@
         <!--  -->
     </div>
     <div class="SelectNew-Menu">
-        <div class="CardMenu" id="Snapshots"><h2 data-lang="Webview.Noticias.Panel.Snapshots"></h2><img src="" id="snapshotsImg"></div>
-        <div class="CardMenu" id="Releases"><h2 data-lang="Webview.Noticias.Panel.Releases"></h2><img src="" id="releasesImg"></div>
-        <div class="CardMenu" id="StepLauncher"><h2 data-lang="Webview.Noticias.Panel.StepLauncher"></h2><img src="" id="steplauncherImg"></div>
-        <div class="ButtonExit"><p data-lang="Webview.Noticias.Panel.Salir"></p></div>
+        <div class="CardMenu" id="Snapshots"><h2 data-lang="Iframe.Noticias.Panel.Snapshots"></h2><img src="" id="snapshotsImg"></div>
+        <div class="CardMenu" id="Releases"><h2 data-lang="Iframe.Noticias.Panel.Releases"></h2><img src="" id="releasesImg"></div>
+        <div class="CardMenu" id="StepLauncher"><h2 data-lang="Iframe.Noticias.Panel.StepLauncher"></h2><img src="" id="steplauncherImg"></div>
+        <div class="ButtonExit"><p data-lang="Iframe.Noticias.Panel.Salir"></p></div>
     </div>
     <button id="ExitChangelogButton" class="ExitChangelogButton-Menu"><p data-lang="News.ExitChangelog"></p></button>
     <div class="ControllerNews">
-        <button id="HidenNews"><p data-lang="Webview.Noticias.Ocultar"></p></button>
-        <button id="LoadMore"><p data-lang="Webview.Noticias.CargarMas"></p></button>
+        <button id="HidenNews"><p></p></button>
+        <button id="LoadMore"><p data-lang="Iframe.Noticias.CargarMas"></p></button>
         <button class="SelectNews-Bt" id="SelectNews-Bt">
-            <div id="SelectNew"><p data-lang="Webview.Noticias.Panel.Releases"></p></div>
+            <div id="SelectNew"><p data-lang="Iframe.Noticias.Panel.Releases"></p></div>
         </button>
-        <button id="Reload"><p data-lang="Webview.Noticias.Recargar"></p></button>
+        <button id="Reload"><p data-lang="Iframe.Noticias.Recargar"></p></button>
     </div>
 </div>
-<script src="../../source/renderer/news.js" type="module"></script>
+<script src="../../source/Renderer/panels/News.js" type="module"></script>
 <script src="../js/new.js" type="module"></script>
 <script>
     const selectNewP = document.querySelector('#SelectNew p');

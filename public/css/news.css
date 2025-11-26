@@ -45,6 +45,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
 }
+
 .news-item{
     display: flex;
     justify-content: center;
@@ -56,10 +57,11 @@
     padding: 0.5em;
     overflow: hidden;
     position: relative;
-    transition: height .5s ease-in-out,transform 250ms ease-in,opacity .2s ease-in-out;
+    transition: background .3s ease-in-out,height .5s ease-in-out,transform 250ms ease-in,opacity .2s ease-in-out;
     z-index: 1;
+    background:#0005;
     &:hover {
-        background-color: #0002;
+        background-color: #1119;
         .hero img {
             filter: grayscale(0%);
         }
@@ -380,6 +382,128 @@
 .changelog-item::-webkit-scrollbar-thumb {
     border-radius: 0;
 }
+.step-news-item{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    width:100%;
+    height:20rem;
+    border-radius:.5em;
+    padding:.5em;
+    overflow:hidden;
+    position:relative;
+    transition:background .3s ease-in-out, height .5s ease-in-out, transform 250ms ease-in, opacity .2s ease-in-out;
+    z-index:1;
+    background:#0005;
+
+    &:hover{
+        background-color:#1119;
+
+        .hero img{
+            filter:grayscale(0%);
+        }
+    }
+
+    &.unvisible{
+        opacity:0;
+        pointer-events:none;
+        transform:translateY(2rem);
+
+        .hero img{
+            opacity:0;
+        }
+    }
+
+    &:nth-child(1){
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+        .hero{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        img{
+            position:relative;
+            image-rendering:auto;
+            image-resolution:600dpi;
+            opacity:1;
+        }
+    }
+
+    .hero{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        transition:transform .5s ease-in-out, height .5s ease-in-out;
+        pointer-events:none;
+        z-index:-1;
+
+        img{
+            position: absolute;
+            bottom:.5em;
+            left:.5em;
+            image-rendering:auto;
+            image-resolution:150dpi;
+            max-width:400px;
+            border-radius:.5em;
+            object-fit:cover;
+            filter:grayscale(50%);
+            transition:transform .8s ease-in-out, width 250ms ease-in, height .8s ease-in-out, filter .3s ease-in-out;
+        }
+    }
+
+    .description{
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height:100%;
+        padding:0 .5rem;
+        display:flex;
+        justify-content:flex-start;
+        align-items:start;
+        flex-direction: column;
+        font-family:"Comfortaa";
+        background-color:#0005;
+        font-size:.8rem;
+        text-shadow:0 0 .5em #0005;
+        transition:height .5s ease-in-out;
+
+        button{
+            position:absolute;
+            bottom:.5em;
+            right:.5em;
+            border:none;
+            border-radius:.5em;
+            padding:.5em 1em;
+            background-color:var(--Button-Item-BG);
+            color:white;
+            transition:color .1s ease-in-out, opacity .5s ease-in-out, background .2s ease-in-out, box-shadow .5s ease-in-out;
+
+            &:hover{
+                background-color:color-mix(in srgb, var(--Button-Item-BG) 50%, white 55%);
+                box-shadow:0 0 1em color-mix(in srgb, var(--Button-Item-BG) 50%, white 65%);
+                color:black;
+            }
+        }
+
+        #Tittle{
+            position:absolute;
+            bottom:.5em;
+            left:.5em;
+            font-family:"Comfortaa";
+            font-size:.9rem;
+        }
+    }
+}
+
 
 @keyframes CloseChangelog{
     0%{
@@ -397,6 +521,7 @@
         right: 0%;
     }
 }
+
 @media (max-width: 768px) {
     .News {
         grid-template-columns: repeat(2, 1fr);
@@ -404,14 +529,11 @@
         padding: 0.5rem;
     }
     .news-item {
-        height: 15rem;
+        height: 20rem;
         padding: 0.25rem;
         &:nth-child(1){
             grid-column: 1 / 1;
             grid-row: 1 / 1;
-        }
-        .hero img {
-            width: 90%;
         }
         .description {
             height: 7rem;
