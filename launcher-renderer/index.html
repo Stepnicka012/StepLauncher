@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PRECARGA -->
+    <link rel="preload" href="./Css/launcher.css" as="style" />
+    <link rel="preload" href="./Css/global.css" as="style" />
+    <link rel="modulepreload" href="../dist/Renderer/Main/Launcher.js" as="script" />
+    <!-- CARGAR -->
+    <link rel="stylesheet" href="./Css/global.css" />
+    <link rel="stylesheet" href="./Css/launcher.css" />
+    <!-- CEO -->
+    <link rel="icon" href="./Static/Resources/icon.png" />
+    <title>StepLauncher</title>
+</head>
+<body class="BodyApp-Root">
+    <header class="TitleBar">
+        <div class="T-Title">
+            <img src="./Static/Resources/icon.png">
+            <p data-lang="Launcher.Title"></p>
+        </div>
+        <div class="T-Buttons">
+            <button onclick="window.ElectronAPI.controlWindow('minimize')"><img src="./Static/Resources/Svg/minus.svg"></button>
+            <button onclick="window.ElectronAPI.controlWindow('maximize')"><img src="./Static/Resources/Svg/square.svg"></button>
+            <button onclick="window.ElectronAPI.controlWindow('close')"><img src="./Static/Resources/Svg/close.svg"></button>
+        </div>
+    </header>
+    <!-- <div class="Notification">
+        <div class="Icon"><img src="" id="IconNotification"></div>
+        <div class="Message"><p id="Message"></p></div>
+        <div class="ButtonExitNotification"><img src="./Static/Resources/Svg/close.svg"></div>
+        <div class="ProgressTimeOut"></div>
+    </div> -->
+    <div class="App-LoaderScreen-UI">
+        <div class="App-LoaderScreen-Top">
+            <img src="./Static/Resources/icon.png" class="App-LoaderScreen-Logo">
+        </div>
+        <div class="App-LoaderScreen-Bottom">
+            <p class="App-LoaderScreen-Text">
+                Cargando Interfaz
+            </p>
+        </div>
+    </div>
+    <main class="App-Root-Main">
+        <div class="App-Sidebar">
+            <div class="Items-Container-Sidebar">
+                <div class="Sidebar-Item" data-openPanel="Settings">
+                    <img src="./Static/Resources/Svg/settings.svg">
+                    <label data-lang="Descriptions.Config"></label>
+                </div>
+                <div class="Sidebar-Item">
+                    <img src="./Static/Resources/Svg/instancie.svg">
+                    <label data-lang="Descriptions.Instancies"></label>
+                </div>
+                <div class="Sidebar-Item">
+                    <img src="./Static/Resources/Svg/download.svg">
+                    <label data-lang="Descriptions.DownloadMC"></label>
+                </div>
+                <div class="Sidebar-Item">
+                    <img src="./Static/Resources/Svg/play.svg">
+                    <label data-lang="Descriptions.Play"></label>
+                </div>
+            </div>
+            <div class="Items-Container-Sidebar-BT">
+                <div class="Sidebar-Item" id="NewsMinecraft">
+                    <img src="./Static/Resources/Svg/News.svg">
+                    <label data-lang="Descriptions.News"></label>
+                </div>
+                <div class="Sidebar-Item" id="TerminalBackend">
+                    <img src="./Static/Resources/Svg/Terminal.svg">
+                    <label data-lang="Descriptions.Console"></label>
+                </div>
+                <div class="Sidebar-Item" onclick="window.ElectronAPI.openExternal('https://discord.gg/37dYy9apwE')">
+                    <img src="./Static/Resources/Svg/discord.svg">
+                    <label data-lang="Descriptions.Discord"></label>
+                </div>
+            </div>
+        </div>
+        <div class="App-Content">
+            <div class="Content" id="Content">
+                <section>
+                    <iframe src="./HTML/news.html" class="NewsIframe" id="IframeNews" frameborder="0"></iframe>
+                </section>
+                <section>
+                </section>
+            </div>
+        </div>
+        <div class="App-Panels-Container-HMTL Unvisible" id="HTMLContainerPanels">
+        </div>
+    </main>
+    <audio id="Audio-Global" preload="auto" src=""></audio>
+    <script defer type="module" src="../dist/Renderer/Main/Launcher.js"></script>
+    <script>
+        const content = document.getElementById("Content");
+        const sections = [...content.querySelectorAll("section")];
+        let currentIndex = 0;
+        function scrollToSection(index) {
+            currentIndex = index;
+            const rect = sections[index].getBoundingClientRect();
+            const contentRect = content.getBoundingClientRect();
+            const realOffset = rect.left - contentRect.left + content.scrollLeft;
+            content.scrollTo({
+                left: realOffset,
+                behavior: "smooth"
+            });
+        }
+
+        document.getElementById("NewsMinecraft").onclick = () => scrollToSection(0);
+        document.getElementById("TerminalBackend").onclick = () => scrollToSection(1);
+
+        window.addEventListener("resize", () => {
+            scrollToSection(currentIndex);
+        });
+    </script>
+</body>
+</html>
