@@ -1,0 +1,29 @@
+{
+    "Launcher":{
+        "Title":"StepLauncher"
+    },
+    "ScreenLoader":{
+        "Inicialization": "Iniciando sistema...",
+        "LoadingConfig": "Cargando configuracion...",
+        "LoadingModules":"Cargando modulos...",
+        "LoadingUi": "Cargando interfaz..."
+    },
+    "Buttons":{
+
+    },
+    "NewsIframe":{
+        "All":"Snapshots y Releases",
+        "Snapshots":"Snapshots",
+        "Releases":"Releases",
+        "StepLauncher":"StepLauncher"
+    },
+    "Descriptions":{
+        "Config":"Configuracion",
+        "Instancies":"Instancias",
+        "DownloadMC":"Descargar Minecraft",
+        "Play":"Jugar Minecraft",
+        "Discord":"Discord Oficial",
+        "News":"Noticias",
+        "Console":"Consola"
+    }
+}
