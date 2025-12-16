@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "rootDir": "launcher-app",
-    "outDir": "./launcher-dist",
+    "rootDir": "./src",
+    "outDir": "./src-dist",
     "module": "nodenext",
     "target": "esnext",
     "moduleResolution": "nodenext",
@@ -18,8 +18,8 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
-    "moduleDetection": "force",
+    "moduleDetection": "force"
   },
-  "include": ["launcher-app"],
+  "include": ["./src"],
   "exclude": ["node_modules", "build", "launcher-dist","launcher-renderer"]
 }

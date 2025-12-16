@@ -1,111 +1,60 @@
 {
   "name": "steplauncher",
-  "version": "0.1.0",
-  "description": "StepLauncher: launcher moderno y potente para Minecraft con soporte de modpacks, mods, instancias, etc...",
-  "main": "./source/App.js",
+  "version": "1.0.0",
+  "buildVersion": "1000",
+  "description": "StepLauncher – Powerful Minecraft Launcher by NovaStepStudios",
+  "homepage": "https://steplauncher.web.app",
+  "main": "./launcher-dist/App.js",
   "type": "module",
-  "private": true,
+  "author": "NovaStepStudios <stepnicka012@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stepnicka012/StepLauncher.git"
+  },
   "scripts": {
     "start": "electron .",
-    "dev": "npm run build:tsc && electron .",
-    "build:tsc": "tsc",
-    "build:tsc:watch": "tsc -w",
-    "build:zip": "npm run build:tsc && electron-builder --win zip",
-    "build:windows": "npm run build:tsc && electron-builder --win",
-    "build:linux": "npm run build:tsc && electron-builder --linux",
-    "build:all": "npm run build:tsc && electron-builder"
+    "build": "tsc && electron-builder",
+    "build:win": "tsc && electron-builder --win",
+    "build:linux": "tsc && electron-builder --linux",
+    "build:all": "tsc && electron-builder --win --linux --mac"
   },
-  "keywords": [
-    "StepLauncher",
-    "Minecraft",
-    "Launcher",
-    "ModLoaders",
-    "Forge",
-    "Fabric",
-    "NeoForge",
-    "Optifine",
-    "Quilt",
-    "Minecraft-Core-Master",
-    "Electron",
-    "StepnickaSantiago",
-    "Mods",
-    "Shaders",
-    "Music",
-    "DataPacks",
-    "Minecraft-Launcher",
-    "Open-Source",
-    "Minecraft-Java-Core",
-    "Electron-App",
-    "Minecraft-Node",
-    "Typescript"
-  ],
-  "author": "StepnickaSantiago <stepnicka012@gmail.com>",
-  "license": "Apache-2.0",
   "devDependencies": {
-    "@types/discord-rpc": "^4.0.10",
-    "@types/node": "24.5.2",
-    "@types/yt-search": "^2.10.3",
-    "electron": "38.4.0",
-    "electron-builder": "26.0.12",
-    "typescript": "^5.9.2"
+    "@types/node": "^24.10.1",
+    "electron-builder": "^26.0.12",
+    "electron": "^39.2.4",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "discord-rpc": "^4.0.1",
-    "electron-log": "5.4.3",
-    "electron-updater": "6.6.2",
-    "ffmpeg-static": "^5.3.0",
-    "fs-extra": "^11.3.2",
-    "music-metadata": "^11.10.3",
-    "pino": "10.1.0",
-    "youtube-dl-exec": "^3.0.26",
-    "youtube-search-api": "^2.0.1"
+    "pino": "^10.1.0",
+    "pino-pretty": "^13.1.2"
   },
   "build": {
     "appId": "com.novastep.steplauncher",
+    "asar":"false",
     "productName": "StepLauncher",
-    "asar": false,
     "directories": {
-      "buildResources": "public/**/*",
-      "output": "Release/${productName}-${version}-${platform}-${arch}"
+      "output": "Releases/${productName}-v${version}-${buildVersion}-${platform}-${arch}"
     },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "Stepnicka012",
-        "repo": "StepLauncher"
-      }
-    ],
     "files": [
-      "public/**/*",
-      "source/**/*",
-      "LICENSE",
-      "package.json"
+      "launcher-dist/**/*",
+      "launcher-renderer/**/*",
+      "package.json",
+      "latest.yaml",
+      "LICENSE.md",
+      "Readme.md"
     ],
     "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "zip",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "icon": "./public/assets/icon.ico"
+      "target": ["zip"],
+      "icon": "./launcher-renderer/Static/Resources/icon.ico"
     },
     "linux": {
-      "target": [
-        "AppImage",
-        "deb",
-        "snap"
-      ],
-      "category": "Game",
-      "icon": "./public/assets/icon.png"
+      "target": ["zip"],
+      "icon": "./launcher-renderer/Static/Resources/icon.png",
+      "category": "Game"
+    },
+    "mac": {
+      "target": ["zip"],
+      "icon": "./launcher-renderer/Static/Resources/icon.icns"
     }
   }
 }

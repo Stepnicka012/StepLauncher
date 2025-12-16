@@ -1,0 +1,26 @@
+version: 1.0.0
+path: StepLauncher.exe
+metadata:
+  buildVersion: 1000
+  buildType: stable
+files:
+  - platform: Windows
+    arch: x64
+    url: ""
+    sha512: ""
+    sha256: ""
+    size: 
+
+  - platform: Windows
+    arch: ia32
+    url: ""
+    sha512: ""
+    sha256: ""
+    size: 
+
+  - platform: Linux
+    arch: x64
+    url: ""
+    sha512: ""
+    sha256: ""
+    size: 
