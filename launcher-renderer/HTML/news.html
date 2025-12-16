@@ -1,0 +1,148 @@
+<link type="modulepreload" src="../../launcher-dist/Renderer/News/Main.js" as="script" />
+<link rel="preload" href="../Css/News/news.css" as="style" />
+<link rel="stylesheet" href="../Css/News/news.css" />
+<style>
+    body{ margin:0; padding: 0; z-index: -1; }
+    *{
+        img{
+            object-fit: cover;
+            image-rendering: optimizeSpeed;
+            image-resolution: 200dpi;
+        }
+        &:focus{ outline: 2px solid aqua; }
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #000;}
+    ::-webkit-scrollbar-thumb { background: #4da4fb; transition: background 0.2s ease; }
+    ::-webkit-scrollbar-thumb:hover { background: #1e90ffff; }
+    ::-webkit-scrollbar-thumb:active { background: #1473d4ff; }
+</style>
+<div>
+    <div class="HiddenButton" id="HiddenButton">
+        <img id="HiddenButtonIcon" src="../Static/Svg/eye.svg">
+        <label id="HiddenButtonLabel" data-lang="HideNews"></label>
+    </div>
+    <div class="News-Container-Root">
+        <div class="NewsCardsContainer" id="News-Container"></div>
+        <div class="ChangelogContainer Unvisible">
+            <div id="Changelog-Container"></div>
+        </div>
+    </div>
+    <div class="News-Panel-Container Unvisible">
+        <div data-filter="all" class="Panel-Item">
+            <div class="ImageContainer">
+                <img src="../Static/Img/Banner/8.webp" loading="lazy">
+            </div>
+            <p data-lang="filter_all"></p>
+        </div>
+        
+        <div data-filter="release" class="Panel-Item">
+            <div class="ImageContainer">
+                <img src="../Static/Img/Banner/12.webp" loading="lazy">
+            </div>
+            <p data-lang="filter_release"></p>
+        </div>
+        
+        <div data-filter="snapshot" class="Panel-Item">
+            <div class="ImageContainer">
+                <img src="../Static/Img/Banner/4.webp" loading="lazy">
+            </div>
+            <p data-lang="filter_snapshots"></p>
+        </div>
+
+        <!-- <div data-filter="steplauncher" class="Panel-Item">
+            <div class="ImageContainer">
+                <img src="../Static/Img/Background/3.webp" loading="lazy">
+                <img src="../Static/Svg/icon.png" class="Step">
+            </div>
+            <p data-lang="filter_steplauncher"></p>
+        </div> -->
+        
+        <div class="News-Panel-Button-Exit" id="News-Panel-Button-Exit"><img src="../Static/Svg/close.svg"></div>
+    </div>
+        <div class="News-Hotbar" id="News-Hotbar">
+        <div class="Hotbar-Button" id="SelectNews"><label data-lang="filter_all"></label></div>
+        <div class="Hotbar-Button" id="LoadMore"><label data-lang="LoadMore"></label></div>
+        <div class="Hotbar-Button" id="Reload"><label data-lang="Reload"></label></div>
+    </div>
+    <script defer type="module" src="../../launcher-dist/Renderer/News/Main.js"></script>
+    <script async defer>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById("HiddenButton"),
+                container = document.querySelector(".News-Container-Root"),
+                icon = document.getElementById("HiddenButtonIcon"),
+                label = document.getElementById("HiddenButtonLabel"),
+                panelItems = document.querySelectorAll('.Panel-Item'),
+                panelContainer = document.querySelector('.News-Panel-Container'),
+                selectNews = document.getElementById('SelectNews'),
+                exitButtonPanel = document.getElementById('News-Panel-Button-Exit'),
+                hotbar = document.getElementById('News-Hotbar');
+                selectNewsLabel = selectNews.querySelector('label');
+
+            function typeWriter(text, element, speed = 50) {
+                element.textContent = '';
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    }
+                }
+                type();
+            }
+            panelItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const pElement = this.querySelector('p');
+                    const texto = pElement.textContent || pElement.innerText;
+                    
+                    if (selectNewsLabel) {
+                        typeWriter(texto, selectNewsLabel, 30);
+                    } else {
+                        typeWriter(texto, selectNews, 30);
+                    }
+             
+                    if (container) {
+                        container.classList.remove('Unvisible');
+                        hotbar.classList.remove('Unvisible');
+                        btn.classList.remove('Unvisible');
+                        panelContainer.classList.add('Unvisible');
+                    }
+                });
+            });
+            exitButtonPanel.addEventListener('click', function() {
+                container.classList.remove('Unvisible');
+                hotbar.classList.remove('Unvisible');
+                btn.classList.remove('Unvisible');
+                panelContainer.classList.add('Unvisible');
+            });
+            selectNews.addEventListener('click', function() {
+                if (container) {
+                    container.classList.add('Unvisible');
+                    hotbar.classList.add('Unvisible');
+                    btn.classList.add('Unvisible');
+                    panelContainer.classList.remove('Unvisible');
+                }
+            });
+            
+            btn.addEventListener("click", () => {
+                const isHidden = container.classList.contains("Unvisible");
+
+                if (isHidden) {
+                    container.classList.remove("Unvisible");
+                    container.classList.add("Visible");
+
+                    icon.src = "../Static/Svg/eye.svg";
+                    // usar traducciones preaplicadas en dataset si están disponibles
+                    label.textContent = label.dataset.hide || label.textContent || '';
+                } else {
+                    container.classList.remove("Visible");
+                    container.classList.add("Unvisible");
+
+                    icon.src = "../Static/Svg/eye-closed.svg";
+                    label.textContent = label.dataset.show || label.textContent || '';
+                }
+            });
+        });
+    </script>
+</div>

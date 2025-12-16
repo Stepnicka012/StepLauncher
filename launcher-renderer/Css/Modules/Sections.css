@@ -1,0 +1,161 @@
+.Section-Launcher-Config,
+.Section-Minecraft-Config,
+.Section-Personalize-Config,
+.Section-Background-Config,
+.Section-Idiome{
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    h1{
+        margin: 0 auto;
+        text-align: center;
+        font-size: var(--font-size);
+    }
+    hr{
+        margin: 0.5em auto;
+        padding: 0;
+        border: 1px solid #0005;
+    }
+    p{
+        font-size: var(--font-size);
+        margin: 0.5rem 0.5rem;
+    }
+}
+.Section-Background-Config{
+    margin: 2rem auto;
+    div{
+        margin:auto;
+        width: 90%;
+        height: auto;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.Section-Minecraft-Config,
+.Section-Personalize-Config{
+    div{
+        width: 100%;
+        margin: 0;
+    }
+    .Coment{
+        width: max-content;
+        max-width: 100dvh;
+        height: auto;
+        margin-left: 1rem;
+        border-left: 3px solid rgba(0, 140, 255, 0.5);
+        min-height: 1rem;
+        border-radius: 0.75rem;
+        background-color: #0005;
+    }
+}
+.Section-Launcher-Config{
+    div{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        margin: 0;
+    }
+    .TypeVersionSandbox{
+        width: max-content;
+        height: 1rem;
+        display:flex;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction:row;
+        font-size: 0.7rem !important;
+        border-radius: 0.3em;
+        background: linear-gradient(45deg,transparent,rgb(255,0,0,0.5),transparent);
+        hr{ width: 1rem; }
+    }
+    .Coment{
+        width: max-content;
+        max-width: 100dvh;
+        height: auto;
+        margin-left: 1rem;
+        border-left: 3px solid rgba(0, 140, 255, 0.5);
+        min-height: 1rem;
+        border-radius: 0.75rem;
+        background-color: #0005;
+    }
+    .Config{
+        justify-content: space-between;
+        flex-direction:row !important;
+    }
+}
+.Section-Idiome{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .SelectIdiome{
+        width: 80%;
+        height: auto;
+        margin: auto;
+        max-height: 25rem;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.2rem;
+        div{
+            position: relative;
+            width: 95%;
+            height: 2rem;
+            margin: 0 auto;
+            background-color: #0005;
+            color:white;
+            font-size: var(--font-size);
+            font-family: 'Motiva Sans',Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            *{pointer-events: none;}
+            img{ width: 1.5rem; }
+            .LevelTraduction{
+                width: 50%;
+                text-align: end;
+                margin-right: 1rem;
+            }
+            &.UnCheck{
+                background-color: #5555;
+                &:hover{
+                    background-color: rgba(32, 50, 56, 0.6);
+                }
+            }
+            &.Check{
+                border-left: 1px solid aqua;
+                border-right: 1px solid aqua;
+                background-color: #0007;
+                &:hover{
+                    background-color: rgba(0, 65, 85, 0.6);
+                }
+            }
+            &.LangImage{
+                width: max-content;
+                background-color: transparent;
+                justify-content: flex-start;
+            }
+        }
+    }
+    .Idiome-Info{
+        position: relative;
+        width: auto;
+        height: auto;
+        color:white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: var(--font-size);
+        font-family: Comfortaa,Arial, Helvetica, sans-serif;
+    }
+}

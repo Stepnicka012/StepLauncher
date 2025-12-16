@@ -1,0 +1,407 @@
+<!---
+hideSidebar: true
+hideContentMain: true
+
+scriptType: module
+scriptDefer: true
+scriptAsync: false
+scriptPath: '../Layouts/Settings.js'
+scriptEntryPoint: initSettings
+--->
+<div class="App-Configuration">
+    <div class="App-Configuration-Sidebar">
+        <div class="App-Configuration-Sidebar-ItemSidebar" data-settingssubpanel="Launcher">
+            <img src="./Static/Svg/cpu.svg">
+            <label data-lang="Settings.Sidebar.Launcher"></label>
+        </div>
+        <!-- <div class="App-Configuration-Sidebar-ItemSidebar" data-settingssubpanel="Plugins">
+            <img src="./Static/Svg/plugins.svg">
+            <label data-lang="Settings.Sidebar.Plugins"></label>
+        </div> -->
+        <div class="App-Configuration-Sidebar-ItemSidebar" data-settingssubpanel="Minecraft">
+            <img src="./Static/Svg/pick.svg">
+            <label data-lang="Settings.Sidebar.Minecraft"></label>
+        </div>
+        <div class="App-Configuration-Sidebar-ItemSidebar" data-settingssubpanel="Personalize">
+            <img src="./Static/Svg/edit.svg">
+            <label data-lang="Settings.Sidebar.Personalize"></label>
+        </div>
+        <div class="App-Configuration-Sidebar-ItemSidebar" data-settingssubpanel="Accesible">
+            <img src="./Static/Svg/accessible.svg">
+            <label data-lang="Settings.Sidebar.Accessible"></label>
+        </div>
+        <div class="App-Configuration-Sidebar-ItemSidebar" data-settingssubpanel="Information">
+            <img src="./Static/Img/Notifications/Info.png">
+            <label data-lang="Settings.Sidebar.Information"></label>
+        </div>
+        <div class="App-Configuration-Sidebar-BT">
+            <div class="App-Configuration-Sidebar-ItemSidebar" data-closePanel="Settings">
+                <label data-lang="Settings.Sidebar.Save"></label>
+            </div>
+            <div class="App-Configuration-Sidebar-ItemSidebar" data-closePanel="Settings">
+                <label data-lang="Settings.Sidebar.Cancel"></label>
+            </div>
+        </div>
+    </div>
+    <div class="App-Configuration-Content">
+        <div class="SECTION_CONFIG Active" data-settingssubpanelid="Launcher">
+            <div class="Config-Title" data-lang="Settings.Titles.Launcher"></div>
+            <div class="Config-Content">
+                <section class="Section-Idiome">
+                    <div class="Idiome-Info">
+                        <h3 data-lang="Settings.Sections.Language"></h3>
+                    </div>
+                    <div class="SelectIdiome">
+                        <div class="Check">
+                            <div class="LangImage">
+                                <img src="./Static/Img/Flags/español.png">
+                                <p data-lang="Language.Spanish.Label"></p>
+                            </div>
+                            <hr />
+                            <label class="LevelTraduction" data-lang="Language.Spanish.LevelTranslation"></label>
+                        </div>
+                        <div class="UnCheck">
+                            <div class="LangImage">
+                                <img src="./Static/Img/Flags/estadoUnidense.png">
+                                <p data-lang="Language.English.Label"></p>
+                            </div>
+                            <hr />
+                            <label class="LevelTraduction" data-lang="Language.English.LevelTranslation"></label>
+                        </div>
+                        
+                    </div>
+                    <button data-lang="Settings.Buttons.Apply"></button>
+                </section>
+                <section class="Section-Launcher-Config">
+                    <hr>
+                    <h1 data-lang="Settings.Sections.General"></h1>
+                    <div class="Config">
+                        <p data-lang="Settings.Buttons.GenerateLog"></p>
+                        <input type="checkbox" id="GenerateLogs">
+                    </div>
+                    <div class="Config">
+                        <p data-lang="Settings.Buttons.ConnectDiscord"></p>
+                        <input type="checkbox" id="ConectDiscord">
+                    </div>
+                    <div class="Config">
+                        <p data-lang="Settings.Buttons.AutoUpdates"></p>
+                        <input type="checkbox" id="CheckAutoUpdates">
+                    </div>
+                    <div class="Config">
+                        <p data-lang="Settings.Buttons.HideAppLaunchMC"></p>
+                        <input type="checkbox" id="HideAppLuanchMc">
+                    </div>
+                    <div class="Config">
+                        <p data-lang="Settings.Buttons.NotificationsMC"></p>
+                        <input type="checkbox" id="NotificationsMc">
+                    </div>
+                    <div class="Config">
+                        <p data-lang="Settings.Buttons.SelectUpdates"></p>
+                        <select id="SelectUpdates">
+                            <option data-lang="Settings.UpdateTypes.Release" value="Releases" selected></option>
+                            <option data-lang="Settings.UpdateTypes.Prerelease" value="Prereleases"></option>
+                            <hr>
+                            <option data-lang="Settings.UpdateTypes.NoUpdates" value="NoUpdates"></option>
+                        </select>
+                    </div>
+                    <hr>
+                    <h1 data-lang="Settings.Sections.Performance"></h1>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.LoadPanel"></p>
+                            <div style="display: flex; justify-content:flex-end; align-items:center; flex-direction:row;">
+                                <button data-lang="Settings.Buttons.LoadPanel" id="LoadPanel" style="margin: auto 0.5rem !important;"></button>
+                                <select name="" id="LoadPanelSelect"></select>
+                            </div>
+                        </div>
+                        <div class="Coment">
+                            <p data-lang="Settings.Texts.LoadPanelDescription"></p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.CleanCache"></p>
+                            <div style="display: flex; justify-content:flex-end; align-items:center; flex-direction:row;">
+                                <button data-lang="Settings.Buttons.CleanCache" id="Limpiar" style="margin: auto 0.5rem !important;"></button>
+                                <select name="" id="CleanUpCacheSelect"></select>
+                            </div>
+                        </div>
+                        <div class="Coment">
+                            <p data-lang="Settings.Texts.CleanCacheDescription"></p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.NoAnimation"></p>
+                            <div style="display: flex; justify-content:flex-end; align-items:center; flex-direction:row;">
+                                <input type="checkbox" id="NoAnimation">
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.NoShadow"></p>
+                            <div style="display: flex; justify-content:flex-end; align-items:center; flex-direction:row;">
+                                <input type="checkbox" id="NoShadow">
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.NoBlur"></p>
+                            <div style="display: flex; justify-content:flex-end; align-items:center; flex-direction:row;">
+                                <input type="checkbox" id="NoBlur">
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.SandboxStep"></p>
+                            <input type="checkbox" id="SandboxStepLauncher">
+                        </div>
+                        <div class="Coment">
+                            <p data-lang="Descriptions.SandboxStep"></p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.HardwareAcceleration"></p>
+                            <input type="checkbox" id="HardwareAcceleration">
+                        </div>
+                        <div class="Coment">
+                            <p data-lang="Descriptions.HardwareAcceleration"></p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.BackgroundThrottling"></p>
+                            <input type="checkbox" id="BackgroundThrottling">
+                        </div>
+                        <div class="Coment">
+                            <p data-lang="Descriptions.BackgroundThrottling"></p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p data-lang="Settings.Buttons.GPUrendering"></p>
+                            <input type="checkbox" id="GPUrendering">
+                        </div>
+                        <div class="Coment">
+                            <p data-lang="Descriptions.GPUrendering"></p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>
+                        <div class="Config">
+                            <p>Motor de renderización de StepLauncher</p>
+                            <select id="renderEngineSelect">
+                                <option value="opengl">OpenGL</option>
+                                <option value="vulkan">Vulkan (experimental)</option>
+                                <option value="software">Software</option>
+                            </select>
+                        </div>
+                        <div class="Coment">
+                            <p>Selecciona el motor de render que quieres usar para Electron/StepLauncher.</p>
+                        </div>
+                        <hr>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+        <div class="SECTION_CONFIG Unvisible" data-settingssubpanelid="Minecraft">
+            <div class="Config-Title" data-lang="Settings.Titles.Minecraft"></div>
+            <div class="Config-Content">
+                <section class="Section-Minecraft-Config">
+                    <div>
+                        <div>
+                            <br>
+                            <hr>
+                            <h1>Java</h1>
+                            <div class="Config">
+                                <p>Ruta de java</p>
+                                <button>Buscar ruta</button>
+                                <input type="text" placeholder="C:\Programs Files\Java\jdk-25\bin\javaw.exe" id="">
+                            </div>
+                            <div class="Config">
+                                <p>Instalacion de java Oficial</p>
+                                <button>Descargar</button>
+                                <select name="" id=""></select>
+                            </div>
+                            <div class="Config">
+                                <p>Cantidad de RAM disponible para Minecraft (MB)</p>
+                                <div class="ram-sliders">
+                                    <label>
+                                        Min: <span id="ram-min-display">2048</span> MB
+                                        <input type="range" id="ram-min" min="512" max="16384" step="512" value="2048">
+                                    </label>
+                                    <label>
+                                        Max: <span id="ram-max-display">4096</span> MB
+                                        <input type="range" id="ram-max" min="512" max="32768" step="512" value="4096">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <hr>
+                            <h1>Descarga de Minecraft</h1>
+                            <div>
+                                <div class="Config" style="display: flex; width: 90%; justify-content: space-between;">
+                                    <p>Descargas Simultaneas</p>
+                                    <input type="number" max="5" value="1" min="1" id="">
+                                </div>
+                                <div class="Config" style="display: flex; width: 90%; justify-content: space-between;">
+                                    <p>Descarga de Java Oficial</p>
+                                    <input type="checkbox" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <hr>
+                            <h1>Mantenimiento</h1>
+                            <div class="Config">
+                                <p>Limpiar Logs</p>
+                                <div>
+                                    <button>Limpiar</button>
+                                </div>
+                            </div>
+                            <div class="Config" >
+                                <p>Verificar integridad de una version</p>
+                                <div>
+                                    <button>Verificar</button>
+                                    <select name="" id="">
+                                        <option value="">1.12.2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <hr>
+                            <h1>Probar Modulos de descarga individualmente</h1>
+                            <div class="Config" style="display: flex; width: 90%; justify-content: space-between;">
+                                <p>Descargador de Assets</p>
+                                <div style="width: max-content;">
+                                    <select name="" id=""></select>
+                                    <button>Descargar</button>
+                                </div>
+                            </div>
+                            <div class="Config" style="display: flex; width: 90%; justify-content: space-between;">
+                                <p>Descargador de Librerias</p>
+                                <div style="width: max-content;">
+                                    <select name="" id=""></select>
+                                    <button>Descargar</button>
+                                </div>
+                            </div>
+                            <div class="Config" style="display: flex; width: 90%; justify-content: space-between;">
+                                <p>Descargador de Nativos</p>
+                                <div style="width: max-content;">
+                                    <select name="" id=""></select>
+                                    <button>Descargar</button>
+                                </div>
+                            </div>
+                            <div class="Config" style="display: flex; width: 90%; justify-content: space-between;">
+                                <p>Descargador de Cliente</p>
+                                <div style="width: max-content;">
+                                    <select name="" id=""></select>
+                                    <button>Descargar</button>
+                                </div>
+                            </div>
+                            <div class="Config" style="display: flex; width: 90%; justify-content: space-between;">
+                                <p>Descargador de Java</p>
+                                <div style="width: max-content;">
+                                    <select name="" id=""></select>
+                                    <button>Descargar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="SECTION_CONFIG Unvisible" data-settingssubpanelid="Personalize">
+            <div class="Config-Title" data-lang="Settings.Titles.Personalize"></div>
+            <div class="Config-Content">
+                <section class="Section-Background-Config">
+                    <hr>
+                    <h1>Fondo</h1>
+                    <!-- Fondo Estático -->
+                    <div style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                        <p>Fondo Estático</p>
+                        <button id="btn-cargar-imagen">Cargar imagen</button>
+                    </div>
+                    <!-- Fondo Animado -->
+                    <div style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                        <p>Fondo Animado</p>
+                        <button id="btn-cargar-video">Cargar archivo</button>
+                    </div>
+                    <!-- Selector de Método de Rellenado -->
+                    <div style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                        <p>Método de Rellenado</p>
+                        <select id="metodo-rellenado">
+                            <option selected value="cover">Cobertura Ajustada</option>
+                            <option value="contain">Ajustar</option>
+                            <option value="100% 100%">Expandir</option>
+                            <option value="stretch">Estirar</option>
+                            <option value="repeat">Mosaico</option>
+                            <option value="center">Centrar</option>
+                        </select>
+                    </div>
+                </section>
+                <section class="Section-Personalize-Config">
+                    <hr>
+                    <h1>Colores</h1>
+                    <div>
+                        <div class="Config" style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                            <p>Tamaño de letras</p>
+                            <input type="number" name="" id="">
+                        </div>
+                        <div class="Config" style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                            <p>Color de los botones</p>
+                            <input type="color" name="" id="">
+                        </div>
+                        <div class="Config" style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                            <p>Color de las Letras</p>
+                            <input type="color" name="" id="">
+                        </div>
+                        <div class="Config" style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                            <p>Color de las notificaciones</p>
+                            <input type="color" name="" id="">
+                        </div>
+                        <div class="Config">
+                            <p>Color de la barra lateral</p>
+                            <input type="color" name="" id="">
+                        </div>
+                        <div class="Config">
+                            <p>Color de la barra de titulo</p>
+                            <input type="color" name="" id="">
+                        </div>
+                        <div class="Config" style="width: 90%; display:flex; justify-content:space-between; align-items:center;">
+                            <p>Transparencia de los elementos</p>
+                            <input type="number" name="" id="">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="SECTION_CONFIG Unvisible" data-settingssubpanelid="Accesible">
+            <div class="Config-Title" data-lang="Settings.Titles.Accessible"></div>
+            <div class="Config-Content"></div>
+        </div>
+        <div class="SECTION_CONFIG Unvisible" data-settingssubpanelid="Information">
+            <div class="Config-Title" data-lang="Settings.Titles.Information"></div>
+            <div class="Config-Content"></div>
+        </div>
+    </div> 
+</div>

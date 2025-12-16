@@ -1,0 +1,128 @@
+{
+    "Launcher": {
+        "Title": "StepLauncher",
+        "Type": "Stable",
+        "Version": "1.0.0"
+    },
+    "ScreenLoader": {
+        "Inicialization": "Iniciando sistema...",
+        "LoadingConfig": "Cargando configuracion...",
+        "LoadingModules": "Cargando modulos...",
+        "LoadingUi": "Cargando interfaz..."
+    },
+    "Sidebar": {
+        "ExpandSidebar": "Expandir Barra lateral",
+        "ContractSidebar": "Contraer Barra lateral",
+        "Config": "Configuracion",
+        "Instancies": "Instancias",
+        "DownloadMC": "Descargar Minecraft",
+        "Play": "Jugar Minecraft",
+        "Bell": "Notificaciones",
+        "Screenshots": "Capturas de minecraft",
+        "News": "Seccion de Noticias",
+        "Console": "StepLauncher Consola",
+        "Discord": "Discord Oficial"
+    },
+    "Console": {
+        "Details": "Detalles",
+        "NoMessage": "(sin mensaje)",
+        "InvalidJSON": "(JSON inválido)",
+        "Title": "Consola de StepLauncher"
+    },
+    "News": {
+        "FilterAll": "Todos",
+        "FilterRelease": "Lanzamientos",
+        "FilterSnapshots": "Snapshots",
+        "FilterStepLauncher": "StepLauncher",
+        "HideNews": "Ocultar Noticias",
+        "ShowNews": "Mostrar Noticias",
+        "LoadMore": "Cargar Mas",
+        "Reload": "Recargar"
+    },
+    "Language": {
+        "Spanish": {
+            "Label": "Español",
+            "LevelTranslation": "Nivel de traduccion : 100%"
+        },
+        "English": {
+            "Label": "Ingles",
+            "LevelTranslation": "Nivel de traduccion : 85%"
+        }
+    },
+    "Notifications": {
+        "Panels": {
+            "SuccessLoad": "Panel se a precargado exitosamente",
+            "ErrorLoad": "Ups! Tuvimos un error al cargar un panel :${err}"
+        }
+    },
+    "Descriptions": {
+        "SandboxStep": "Puede mejorar velocidad en ciertas operaciones, pero acosta de menos seguridad.",
+        "HardwareAcceleration": "Activa para que el launcher use mejor la tarjeta gráfica y se vea más fluido.",
+        "BackgroundThrottling": "Mantiene el launcher rápido aunque tengas otras ventanas abiertas.",
+        "GPUrendering": "Mejora la velocidad de animaciones y efectos visuales.",
+        "ExtendedMemory": "Permite que el launcher maneje varias cosas al mismo tiempo sin trabarse."
+    },
+    "Settings": {
+        "Sidebar": {
+            "Launcher": "Configuracion de StepLauncher",
+            "Security": "Seguridad de StepLauncher",
+            "Plugins": "Plugins de StepLauncher",
+            "Minecraft": "Configuracion de Minecraft",
+            "Personalize": "Personalizacion",
+            "Accessible": "Accesibilidad",
+            "Information": "Informacion de la App",
+            "Save": "Guardar",
+            "Cancel": "Cancelar"
+        },
+        "Titles": {
+            "Launcher": "Launcher",
+            "Security": "Seguridad",
+            "Plugins": "Plugins",
+            "Minecraft": "Minecraft",
+            "Personalize": "Personalizacion",
+            "Accessible": "Accesibilidad",
+            "Information": "Informacion"
+        },
+        "Sections": {
+            "General": "General",
+            "Language": "Idioma",
+            "Performance": "Rendimiento"
+        },
+        "Buttons": {
+            "Apply": "Aplicar",
+            "ConnectDiscord": "Conectarse a Discord",
+            "GenerateLog": "Generar Logs",
+            "AutoUpdates": "Actualizaciones Automaticas",
+            "SelectUpdates": "Obtener Actualizaciones",
+            "HideAppLaunchMC": "Ocultar Launcher al iniciar Minecraft",
+            "NotificationsMC": "Recivir notificaciones al abrir Minecraft",
+            "SandboxStep": "Deshabilitar sandbox",
+            "HardwareAcceleration": "Aceleracion por hardware",
+            "BackgroundThrottling": "Deshabilitar throttling de background",
+            "GPUrendering": "Optimizar renderizado de GPU",
+            "ExtendedMemory": "Memoria extendida del launcher",
+            "LoadPanel": "Cargar Panel",
+            "CleanCache": "Limpiar Caché",
+            "NoAnimation": "Desactivar animaciones",
+            "NoShadow": "Desactivar sombras",
+            "NoBlur": "Desactivar desenfoque"
+        },
+        "UpdateTypes": {
+            "Release": "Stable",
+            "Prerelease": "Beta",
+            "NoUpdates": "No recivir"
+        },
+        "Texts": {
+            "LoadPanelDescription": "Precarga paneles para mejorar el rendimiento.",
+            "CleanCacheDescription": "Limpia archivos temporales para liberar espacio."
+        }
+    },
+    "Panels": {
+        "ID": {
+            "Settings": "Panel de Configuracion",
+            "Instancies": "Panel de Instancias Minecraft",
+            "Download": "Panel de Descarga Minecraft",
+            "Play": "Panel de Jugar Minecraft"
+        }
+    }
+}
