@@ -1,25 +1,28 @@
 {
   "compilerOptions": {
     "rootDir": "launcher-app",
-    "outDir": "./launcher-dist",
-    "module": "nodenext",
-    "target": "esnext",
-    "moduleResolution": "nodenext",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "lib": ["esnext","DOM"],
+    "outDir": "dist",
+    "lib": ["ESNext","DOM"],
     "types": ["node","electron"],
-    "sourceMap": false,
-    "declaration": false,
-    "declarationMap": false,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "verbatimModuleSyntax": true,
+    "noEmit": false,
+	
     "strict": true,
+    "skipLibCheck": true,
+	"noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+	"removeComments": true,
+	"importHelpers": true,
+	
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "skipLibCheck": true,
-    "moduleDetection": "force",
-  },
-  "include": ["launcher-app"],
-  "exclude": ["node_modules", "build", "launcher-dist","launcher-renderer"]
+    "noPropertyAccessFromIndexSignature": false
+  }
 }

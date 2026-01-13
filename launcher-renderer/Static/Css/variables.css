@@ -1,0 +1,24 @@
+:root{
+    /* BACKGROUND */
+    --bg-color-app: url('../Img/Background/2.jpg');
+    --bg-color-titlebar: #111;
+    --bg-color-sidebar: #0008;
+    --bg-color-download: aqua;
+    --dialog-bg: #111;
+
+    --minecraft-dialog-color: red;
+    --minecraft-dialog-linear: color-mix(in srgb, var(--minecraft-dialog-color) 50%,black 90%);
+
+    --button-bg: #0005;
+    --button-bg-hover: #5555;
+    --button-bg-active: #7777;
+    /* FILTER */
+    --filter-blur: 4px;
+    --filter-saturate: 1.5;
+    /* NEWS */
+    --news-bg: #0008;
+    --news-first-card-h:400px;
+    --news-card-h:250px;
+    /* INTERNAL */
+    --progress-download-bg: 0%;
+}

@@ -1,0 +1,284 @@
+@import url('../fonts.css');
+@import url('../variables.css');
+* {
+    scrollbar-width:thin;
+    scroll-behavior: smooth;
+    scrollbar-color: #555 #111;
+}
+.News_App_Body{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    user-select: none;
+    z-index: 1;
+}
+.News_Container{
+    flex: 1 0;
+    width: 100%;
+    overflow: hidden;
+}
+.News_Main_Cards{
+    width: calc(100% - 1rem);
+    height: calc(100% - 3.5rem);
+    padding: .5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: max-content;
+    gap: .5rem;
+    overflow: auto;
+	transition: all 300ms ease-in-out;
+	&.Unvisible{
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(-15px);
+	}
+    .NEWS_CARD{
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        height: var(--news-card-h);
+        background-color: var(--news-bg);
+        border-radius: 0.5em;
+        display: block;
+        z-index: 1;
+        &.Unvisible{
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-1rem);
+            .Messages, .Images,
+            .Content, .Buttons{
+                display: none;
+                visibility: hidden;
+                content-visibility: hidden;
+            }
+        }
+        .Messages{
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 5rem;
+            padding: 0 1rem;
+            height: 2rem;
+            border-radius: 0 0.5em 0 0.5em;
+            background-color: #0005;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            gap: 0.5em;
+            color:white;
+            font-size: .9rem;
+            font-family: "Motiva Sans",Arial, Helvetica, sans-serif;
+            z-index:2;
+        }
+        .Images{
+            position: absolute;
+            inset:0;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5em;
+            overflow: hidden;
+            z-index: -1;
+            img{
+                margin: auto;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .Content{
+            position: absolute;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            pointer-events: all;
+            border-radius: 0.5em;
+            z-index: 1;
+            background-color: #0005;
+            transition: all 250ms ease-in-out;
+            &:hover{
+                backdrop-filter: blur(5px) saturate(1.5) brightness(1.0);
+            }
+            .Tittle{
+                position: absolute;
+                top: 1rem;
+                left: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 1rem;
+                background-color:#1115;
+                border-radius: .5em;
+                height: 2.5rem;
+                color:white;
+                font-family:'Dongle';
+                font-size: 1.25dvw;
+                width: max-content;
+                min-width: 15rem;
+                border: 1px solid transparent;
+                &:hover{
+                    background-color: #3335;
+                    border: 1px solid #5555;
+                }
+            }
+            .Information{
+                position: absolute;
+                top: 1rem;
+                right: .5em;
+                color:white;
+                font-family: "Dongle",Arial, Helvetica, sans-serif;
+            }
+            .Text{
+                position: absolute;
+                top: 4rem;
+                left: 2rem;
+                width: calc(100% - 6rem);
+                height: calc(100% - 4rem);
+                padding: 0 1rem;
+                color:white;
+                font-family: "Fredoka",Arial, Helvetica, sans-serif;
+                text-shadow: 0 0 1em black;
+                background-color: #0005;
+                border-top-left-radius: 0.5em;
+                border-top-right-radius: 0.5em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .Buttons{
+            position: absolute;
+            bottom: 0.5em;
+            right: 0.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: max-content;
+            gap: .5em;
+            z-index: 1;
+            button{
+                background-color: #111;
+                border-radius: .5em;
+                border: none;
+                color: white;
+                cursor: pointer;
+                min-width: 5rem;
+                min-height: 2rem;
+                padding: .25em 1em;
+                &:hover{
+                    background-color: #555;
+                }
+            }
+        }
+        &:not(:first-child){
+            .Content{
+                overflow: hidden;
+                white-space: normal;
+                text-overflow: clip;
+                background-color: #0008;
+                backdrop-filter: blur(2px) saturate(1.2);
+                border-radius: 0.5em;
+
+                .Tittle{
+                    font-size: .7dvw;
+                    min-width: 5rem;
+                    height: 2rem;
+                    padding: 0 0.65rem;
+                    background-color: #1113; 
+                    border: 1px solid #4443;
+                    &:hover{
+                        background-color: #2223;
+                        border: 1px solid #5553;
+                    }
+                }
+
+                .Information{
+                    font-size: 0.9rem;
+                    color: #ddd;
+                }
+
+                .Text {
+                    font-size: 0.95rem;
+                    line-height: 1.4em;
+                    height: 165px;
+                    color: #eee;
+                    text-shadow: 0 0 0.5em black;
+                    background-color: #0005;
+                    padding: 0.5rem 0.75rem;
+                    border-radius: 0.5em 0.5em 0 0;
+                    mask: linear-gradient(black 50%,transparent 90%);
+                }
+
+            }
+
+            .Hero{
+                display: none !important;
+                visibility: hidden;
+                content-visibility: hidden;
+            }
+
+            .Buttons{
+                button{
+                    min-width: 4.5rem;
+                    min-height: 1.8rem;
+                    font-size: 0.85rem;
+                    padding: 0.2em 0.8em;
+                }
+            }
+        }
+
+        &:first-child{
+            grid-column: 1 / 4;
+            width: 100%;
+            height: var(--news-first-card-h);
+            .Banner{
+                display: none;
+                content-visibility: hidden;
+            }
+        }   
+    }
+}
+
+.News_Control{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5rem;
+    background:var(--bg-color-sidebar);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    button{
+        min-width: 6rem;
+        height: 1.5rem;
+        border:none;
+        text-align: center;
+        border-radius: .5rem;
+        font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;
+        font-weight: 550;
+        background-color:#0009;
+        color:white;
+        outline: none;
+        cursor: pointer;
+        &:hover{
+            background-color: #5555;
+        }
+        &.ShowAllNews{
+            position: absolute;
+            left: .5em;
+        }
+        &#HidenAndShow{
+            position: absolute;
+            right: .5em;
+        }
+    }
+}

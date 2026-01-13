@@ -1,0 +1,123 @@
+.Dialogs_Container #LaunchDialog{
+	select,::picker(select) {
+		appearance: none;
+	}
+
+	select{
+		appearance: none;
+		background:linear-gradient(180deg,#1a1a1a,#0f0f0f);
+		color: #fff;
+		border: 1px solid #3338;
+		border-radius: .45rem;
+		padding: .35rem;
+		font-family: 'Motiva Sans',Arial, Helvetica, sans-serif;
+		font-size: .9rem;
+		cursor: pointer;
+		transition: 
+			border .15s ease,
+			box-shadow .15s ease;
+		&:hover{
+			border-color: #5a7cff;
+			background:linear-gradient(180deg,#202020,#141414);
+		}
+
+		&:focus{
+			outline: none;
+			border-color: #7aa2ff;
+			box-shadow: 0 0 0 2px #7aa2ff33;
+		}
+
+		&:disabled{
+			opacity: .5;
+			cursor: not-allowed;
+		}
+	}
+
+	option{
+		background: #0f0f0f;
+		color: #fff;
+	}
+
+	option[data-state="beta"]{
+		color: #ffb86c;
+	}
+	.Launch-Button{
+		position: absolute;
+		bottom: 1em;
+		right: 1em;
+		width: 10rem;
+		height: 2rem;
+		border:none;
+		border-radius: 0.5em;
+		background: #0005;
+		border: 1px solid transparent;
+		cursor: pointer;
+		color:white;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: border 200ms ease-in-out,
+					box-shadow 1s ease-in-out,
+					background 250ms ease-in-out;
+		&:hover{
+			border: 1px solid aqua;
+			box-shadow: 0 0 1em cyan;
+			background-color: #5555;
+		}
+	}
+}
+
+.Dialogs_Container #LaunchDialog {
+    width: 50rem;
+    height: 25rem;
+	min-width: 50rem;
+    max-width: 90vw;
+    max-height: 85vh;
+    resize: both;
+    overflow: auto;
+	&::-webkit-resizer { display: none; }
+    &::after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 1rem;
+        height: 1rem;
+        background-image: url('../../Svg/others/arrow-down-right.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        pointer-events: none;
+        z-index: 500;
+    }
+}
+
+.Dialogs_Container #LaunchDialog .Dialog-Body .Launch-Selector-Version{
+	position: absolute;
+	top: -3px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: calc(100%  - 2rem);
+	height: calc(100% + 3px);
+	color:white;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+	flex-direction: column;
+	text-align: center;
+	padding: 0 1rem;
+	hr{
+		width: 100%;
+		border: 1px solid #0005;
+	}
+	.SELECTORS{
+		position: absolute;
+		top: 0;
+		left: 1rem;
+		display:inline-flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: .5rem;
+		font-family: 'Nunito Sans',Arial, Helvetica, sans-serif;
+	}
+}

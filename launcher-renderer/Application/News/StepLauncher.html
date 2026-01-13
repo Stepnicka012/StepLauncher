@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="es-AR">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+    content="
+        default-src 'none';
+        script-src 'self';
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' https: data:;
+        font-src 'self';
+        connect-src 'self';
+    ">
+
+    <link rel="stylesheet" href="../../Static/Css/News/StepLauncher_News.css">
+</head>
+<body>
+    <div class="News_App_Body">
+        <div class="News_Container">
+            <div class="News_Main_Cards">
+                
+                <div class="NEWS_CARD IMPORTANT">
+                    <div class="Messages">
+                        <p>IMPORTANTE</p>
+                    </div>
+                    <div class="Images">
+                        <img decoding="auto" loading="lazy" class="Hero" src="../../Static/Img/Background/0.jpg"></img>
+                        <img decoding="auto" loading="lazy" class="Banner" src="../../Static/Img/Background/0.jpg"></img>
+                    </div>
+                    <div class="Content">
+                        <div class="Tittle">
+                            <h1>StepLauncher 1.0</h1>
+                        </div>
+                        <div class="Information">
+                            <p>Publicado : 2026 / 01 / 05</p>
+                        </div>
+                        <div class="Text">
+                            StepLauncher 1.0 es la primera versión oficial del launcher y permite descargar Minecraft Vanilla de manera sencilla y directa.<br>
+                            En esta versión inicial, los usuarios pueden configurar algunas opciones básicas del launcher y del juego, mientras se preparan futuras mejoras.<br>
+                            El launcher aún no tiene funciones avanzadas como mods, instancias o loaders, ya que estas se añadirán con el tiempo.<br>
+                            Los usuarios pueden explorar la interfaz, familiarizarse con la navegación y probar cómo funciona el launcher en su estado actual.<br>
+                            Toda la configuración disponible se guarda de forma segura, permitiendo ajustar algunos parámetros del juego y del launcher.<br>
+                            <hr style="border: 1px solid #5555;">
+                            El equipo de desarrollo recopilará feedback de la comunidad para priorizar las funciones que se implementarán en próximas versiones.<br>
+                            Cada actualización futura agregará nuevas opciones de personalización, mejoras de rendimiento y herramientas adicionales según las necesidades de los usuarios.<br>
+                            Esta primera versión sirve como base para que el launcher crezca de forma gradual y controlada, evitando prometer funcionalidades que aún no existen.<br>
+                            Los usuarios pueden reportar errores, sugerencias y cualquier experiencia relevante para ayudar a mejorar StepLauncher de manera continua.<br>
+                            Con el tiempo, se irán integrando funciones avanzadas de descarga, gestión de versiones y mejoras visuales, todo basado en la retroalimentación recibida.<br>
+                            El objetivo principal de esta versión inicial es ofrecer una experiencia estable y confiable, aunque limitada, que permita probar y acostumbrarse al launcher.<br>
+                            StepLauncher continuará evolucionando con cada actualización, añadiendo funciones nuevas y optimizando las existentes según la experiencia y necesidades de la comunidad.<br>
+                        </div>
+                    </div>
+                    <!-- <div class="Buttons">
+                        <button>Ver Changelog</button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="News_Control">
+                <!-- <button class="ShowAllNews">Ver lista completa de noticias</button>
+                <div>
+                    <button id="LoadMore">Cargar Mas</button>
+                    <button id="Reload">Recargar</button>
+                </div> -->
+                <button id="HidenAndShow">Ocultar</button>
+            </div>
+        </div>
+    </div>
+	<script defer src="../../Static/JS/News/StepLauncher.js"></script>
+</body>
+</html>

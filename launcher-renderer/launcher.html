@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- CONFIG -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy"
+        content="
+        default-src 'self' file:; 
+        script-src 'self' file:; 
+        style-src 'self' 'unsafe-inline' file:; 
+        img-src 'self' data: file: https:; 
+        font-src 'self' file:; 
+        connect-src
+            'self'
+            file:
+            https://launchermeta.mojang.com
+            https://piston-meta.mojang.com
+            https://piston-data.mojang.com;
+        frame-src 'self' file:;
+    ">
+    <base href="./" />
+
+    <!-- PRELOAD -->
+    <link rel="preload" href="./Static/Css/variables.css" as="style" />
+    <link rel="preload" href="./Static/Css/global.css" as="style" />
+    <link rel="preload" href="./Static/Css/fonts.css" as="style" />
+    <link rel="preload" href="./Static/Css/Dialog/global.css" as="style" />
+    <link rel="preload" href="./Static/Css/Application/launcher.css" as="style" />
+    
+    <!-- LOAD -->
+    <link rel="stylesheet" href="./Static/Css/variables.css" />
+    <link rel="stylesheet" href="./Static/Css/global.css" />
+    <link rel="stylesheet" href="./Static/Css/fonts.css" />
+    <link rel="stylesheet" href="./Static/Css/Dialog/global.css" as="style" />
+    <link rel="stylesheet" href="./Static/Css/Application/launcher.css" />
+
+    <!-- APPLICATION -->
+    <link rel="icon" href="./Application/Resources/icon.ico" type="image/x-icon" />
+    <title>StepLauncher</title>
+</head>
+<body>
+    <header class="TitleBar">
+        <div>
+            <img src="./Application/Resources/StepLauncher-32x32.png" loading="lazy" decoding="sync" type="image/png">
+            <h1>StepLauncher</h1>
+        </div>
+        <div>
+            <button><img src="./Static/Svg/global/minus.svg" decoding="async" type="image/svg"></button>
+            <button><img src="./Static/Svg/global/square.svg" decoding="async" type="image/svg"></button>
+            <button><img src="./Static/Svg/global/x.svg" decoding="async" type="image/svg"></button>
+        </div>
+    </header>
+    <div class="BACKGROUND_VIDEO">
+        <video autoplay muted loop preload="auto">
+            <source src="" type="video/mp4">
+        </video>
+    </div>
+    <main class="Main_Root">
+        <div class="Sidebar collapsed">
+            <div class="Sidebar-Button-MainApp"><img src="./Static/Svg/sidebar/layout-sidebar.svg" loading="lazy" decoding="sync" type="image/svg"></div>
+            <div class="Sidebar-Main-Buttons">
+                <div class="Sidebar-Item-MainApp" data-html-open="Settings">
+                    <img src="./Static/Svg/sidebar/settings.svg" loading="eager" decoding="async" type="image/svg">
+                    <div class="Text">
+                        <p class="TextOption">Configuracion</p>
+                        <label class="Description">Menu de Configuracion</label>
+                    </div>
+                </div>
+                <!-- <div class="Sidebar-Item-MainApp">
+                    <img src="./Static/Svg/sidebar/package.svg" loading="eager" decoding="async" type="image/svg">
+                    <div class="Text">
+                        <p class="TextOption">Instancias</p>
+                        <label class="Description">Menu de Instancias</label>
+                    </div>
+                </div> -->
+                <div class="Sidebar-Item-MainApp" data-open-dialog="DownloadDialog">
+                    <img src="./Static/Svg/sidebar/download.svg" loading="eager" decoding="async" type="image/svg">
+                    <div class="Text">
+                        <p class="TextOption">Descargas</p>
+                        <label class="Description">Menu de Instalacion</label>
+                    </div>
+                </div>
+                <div class="Sidebar-Item-MainApp" data-open-dialog="LaunchDialog">
+                    <img src="./Static/Svg/sidebar/gamepad.svg" loading="eager" decoding="async" type="image/svg">
+                    <div class="Text">
+                        <p class="TextOption">Jugar</p>
+                        <label class="Description">Menu de Jugar</label>
+                    </div>
+                </div>
+            </div>
+            <hr style="pointer-events: none; opacity: 0;">
+            <div class="Sidebar-Bottom-Buttons">
+                <div class="Sidebar-Item-MainApp" id="DISCORD_LINK">
+                    <img src="./Static/Svg/sidebar/discord.svg" loading="eager" decoding="async" type="image/svg">
+                    <div class="Text">
+                        <p class="TextOption">Discord</p>
+                        <label class="Description">Ir al Discord Oficial</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Main_Content_Viewer">
+            <div class="Main_Content" id="Main_Content">
+                <iframe src="./Application/News/StepLauncher.html" loading="lazy" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+    </main>
+    <div id="HTML_Container" class="HTML_Container Unvisible">
+        <div class="HTML_Content Unvisible"></div>
+    </div>
+    <div class="Minecraft-Container Unvisible">
+        <div class="Minecraft-Error Unvisible">
+            <div class="Message">
+                <div class="Message-Header">
+                    <h1>¡Minecraft se a cerrado inesperadamente!</h1>
+                </div>
+                <div class="Message-Body">
+                    <div class="Process-Info">
+                        <div>
+                            <label>Minecraft Version</label> <label>1.0.0</label>    
+                        </div>
+                        <div>
+                            <label>Java</label> <label>Java 17 (Eclipse Adoptium)</label>
+                        </div>
+                        <div>
+                            <label>Codigo de Salida</label> <label>0</label>
+                        </div>
+                        <div style="justify-content: flex-start; gap: 0.5em;">
+                            <button id="ReportError">Reportar error</button>
+                            <button id="MoreInfoError">Ver detalles tecnicos</button>
+                        </div>
+                    </div>
+                    <div class="Process-Message-Error">
+                        <label>Codigo de Error</label>
+                        <div class="Error-Container">
+                            <pre>
+java.lang.RuntimeException: Rendering engine failed to initialize
+    at net.minecraft.client.main.Main.main(Main.java:198)
+Caused by: org.lwjgl.LWJGLException: Pixel format not accelerated
+    at org.lwjgl.opengl.WindowsPeerInfo.nChoosePixelFormat(Native Method)
+    at org.lwjgl.opengl.WindowsPeerInfo.choosePixelFormat(WindowsPeerInfo.java:52)
+    at org.lwjgl.opengl.WindowsDisplay.createWindow(WindowsDisplay.java:247)
+    at org.lwjgl.opengl.Display.create(Display.java:848)
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="Footer">
+                        <div>
+                            <button>Cerrar Panel</button>
+                        </div>
+                        <div>
+                            <button>Volver a abrir Minecraft</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Report"></div>
+        </div>
+    </div>
+    <div class="Dialogs_Container">
+        <dialog  id="DownloadDialog" class="HIDDEN_DIALOG">
+            <div class="Dialog-Title">
+                <h2>Menu Descargas</h2>
+				<div>
+					<button class="Dialog-Close"><img src="./Static/Svg/global/x.svg"></button>
+				</div>
+			</div>
+            <div class="Dialog-Body">
+                <div class="Dialog-Download-Active Hidden" id="DIALOG_DOWNLOAD_ACTIVE">
+                    <div class="Steps-Download">
+                        <div data-stepdownload="Version">
+                            <label class="Step-Version" id="TEXT">Version</label>
+                            <hr>
+                            <div class="Information">
+                                <label id="PROGRESS">00.00%</label>
+                            </div>
+                        </div>
+                        <div data-stepdownload="Natives">
+                            <label class="Step-Natives" id="TEXT">Natives</label>
+                            <hr>
+                            <div class="Information">
+                                <label id="PROGRESS">00.00%</label>
+                            </div>
+                        </div>
+                        <div data-stepdownload="Libraries">
+                            <label class="Step-Libraries" id="TEXT">Libraries</label>
+                            <hr>
+                            <div class="Information">
+                                <label id="PROGRESS">00.00%</label>
+                            </div>
+                        </div>
+                        <div data-stepdownload="Assets">
+                            <label class="Step-Assets" id="TEXT">Assets</label>
+                            <hr>
+                            <div class="Information">
+                                <label id="PROGRESS">00.00%</label>
+                            </div>
+                        </div>
+                        <div data-stepdownload="Runtime">
+                            <label class="Step-Runtime" id="TEXT">Runtime</label>
+                            <hr>
+                            <div class="Information">
+                                <label id="PROGRESS">00.00%</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Version-Download-Icon">
+                        <img src="./Static/Img/Mobs/bee.gif" loading="lazy" decoding="auto">
+                        <h2 id="SELECTED_VERSION">Minecraft</h2>
+                    </div>
+                    <div class="Steps-Progress">
+                        <div class="Image-Container">
+                            <img src="./Static/Img/Blocks/Grass.png" loading="eager" decoding="async">
+                        </div>
+                        <p class="Progress_Text_Porcentaje">00.00%</p>
+                    </div>
+					<div class="Buttons-Download">
+						<button id="CANCEL_INSTALLATION">Cancelar</button>
+						<button id="CONTROL_INSTALLATION">Pausar</button>
+					</div>
+                </div>
+                <div class="Dialog-Sidebar Show" id="DIALOG_SEARCH_VERSION">
+                    <div class="Dialog-Sidebar-Items-Container">
+                        <div class="Dialog-Sidebar-Item">
+                            <img src="./Static/Img/Blocks/Grass.png" loading="eager" decoding="async" type="image/svg">
+                            <div class="Text">
+                                <label class="Description">Minecraft Vanilla</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="Dialog-Overlay-Download Hidden" id="DIALOG_VERIFYING_DATA">
+					<h1 id="TEXT-LOADING-INFO-VERSION">Verificando Version - 0.0.0</h1>
+					<p id="TEXT-LOADING-INFO">Obtendiendo datos <br> por favor espere un momento...</p>
+				</div>
+                <div class="Dialog-Content Show" id="DIALOG_SEARCH_VERSION">
+                    <main class="Container-Version-Download">
+                        <div class="Selector">
+                            <div class="Type-Version">
+                                <div class="Version-Container">
+                                    <label>Release</label> 
+                                    <label class="switch">
+                                        <input type="checkbox" data-type="release" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="Version-Container">
+                                    <label>Snapshot</label> 
+                                    <label class="switch">
+                                        <input type="checkbox" data-type="snapshot">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="Version-Container">
+                                    <label>Beta</label> 
+                                    <label class="switch">
+                                        <input type="checkbox" data-type="old_beta">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="Version-Container">
+                                    <label>Alpha</label> 
+                                    <label class="switch">
+                                        <input type="checkbox" data-type="old_alpha">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="Select-Version">
+                                <div class="Search-Version">
+                                    <input type="text" id="SearchVersion" placeholder="Buscar una version...">
+                                </div>
+                                <div class="Versions"></div>
+                            </div>
+                        </div>
+                    </main>
+                    <div class="Footer">
+                        <p class="Selected-Version">Version seleccionada : Ninguna</p>
+                        <div id="BTN_INSTALL" class="Button-Download"> Instalar </div>
+                    </div>
+                </div>
+            </div>
+        </dialog>
+        <dialog id="LaunchDialog" class="HIDDEN_DIALOG">
+            <div class="Dialog-Title">
+                <h2>Menu Lanzamiento</h2>
+				<div>
+					<button class="Dialog-Close"><img src="./Static/Svg/global/x.svg"></button>
+				</div>
+            </div>
+            <div class="Dialog-Body">
+				<div class="Launch-Selector-Version">
+					<div class="SELECTORS">
+						<p>Seleccione una version</p>
+						<select id="">
+							<option value="" disabled selected>No ay versiones instaladas</option>
+						</select>
+					</div>
+				</div>
+				<button class="Launch-Button">¡Ejecutar Minecraft!</button>
+			</div>
+        </dialog>
+    </div>
+    <script defer type="module" src="../dist/Render/Global/Global.js"></script>
+    <script defer type="module" src="../dist/Render/Launcher/Launcher.js"></script>
+    <script defer type="module" src="../dist/Render/Launcher/Index.js"></script>
+</body>
+</html>

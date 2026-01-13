@@ -1,0 +1,275 @@
+.Sidebar{
+    position: relative;
+    width: 15rem;
+    height: calc(100% - 1rem);
+    padding: 0.5rem 0;
+    display: grid;
+    grid-auto-rows: auto 1fr auto;
+    gap: 0.25rem;
+    background-color: var(--bg-color-sidebar);
+    transition: width 350ms ease-in-out;
+    z-index: 1;
+    .Sidebar-Bottom-Buttons,
+    .Sidebar-Main-Buttons{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    &.collapsed{
+        width: 3rem;
+        .Sidebar-Item-MainApp{
+            width: 80%;
+            justify-content: center;
+            padding: 0;
+            .TextOption{
+                opacity: 0;
+                width: 0;
+            }
+            .Description{
+                left:200%;
+            }
+            &:active{
+                scale: 0.95;
+            }
+            &:hover{
+                .Description{
+                    left:3rem !important;
+                }
+            }
+        }
+    }
+    .Sidebar-Button-MainApp{
+        position: absolute;
+        top: 0.5rem;
+        right: -2rem;
+        width: 27px;
+        height: 27px;
+        background-color: var(--bg-color-sidebar);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+
+    &.collapsed .Sidebar-Button-MainApp{
+        transform: rotate(180deg);
+    }
+
+    .Sidebar-Item-MainApp{
+        position: relative;
+        width: calc(95% - 2rem);
+        height: 2.2rem;
+        border-radius: 0.2em;
+        background-color: var(--bg-color-sidebar);
+        border: 1px solid transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        user-select: none;
+        cursor: pointer;
+        font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;
+        z-index: 1;
+        transition: border 150ms ease,
+                    background-color 200ms ease,
+                    width 250ms ease-in-out,
+                    padding 250ms ease-in-out,
+                    scale 100ms ease-in-out;
+        img{
+            width: 20px;
+        }
+        .TextOption{
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+			text-overflow: clip;
+            pointer-events: none;
+			transition: opacity 350ms ease-in-out,
+						width 450ms ease-in-out;
+        }
+        .Description{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 125%;
+            padding: 0.1em 0.3em;
+            border-radius: 0.2em;
+            width: max-content;
+            background-color: var(--bg-color-sidebar);
+            backdrop-filter:  blur(var(--filter-blur)) saturate(var(--filter-saturate));
+            pointer-events: none;
+            opacity: 0;
+            text-align: center;
+            transition: left .40s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        opacity .15s linear;
+        }
+        &:active{
+            scale: 0.97;
+        }
+        &:hover{
+            background-color: color-mix(in srgb, var(--bg-color-sidebar) 70%, rgba(255, 255, 255, 0.50) 50%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            .Description{
+                opacity: 1;
+                left: 110%;
+            }
+        }
+    }
+}
+.Main_Content_Viewer{
+    flex: 1;
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    .Main_Content{
+        width: 100%;
+        height: 100%;
+    }
+}
+.Minecraft-Container{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0005;
+    backdrop-filter: blur(4px);
+    z-index: 500;
+    transition: opacity 150ms ease-in-out;
+    &.Unvisible,
+    .Unvisible{
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.Minecraft-Error{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: linear-gradient(transparent 60%,var(--minecraft-dialog-linear)),radial-gradient(circle at bottom center,var(--minecraft-dialog-linear),#111 90%);
+    width: 60%;
+    height: 70dvh;
+    border-radius: .5rem;
+    z-index: 500;
+    .Message,
+    .Message-Body{
+        width: calc(100% - 2rem);
+        padding: 0 1rem;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+    }
+    .Message{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        .Message-Header{
+            font-size: 0.5em;
+            font-weight: bolder;
+            font-family: 'Motiva Sans',Arial, Helvetica, sans-serif;
+        }
+    }
+    button{
+        border: none;
+        border-radius: .2em;
+        padding: 0.35em;
+        background-color: #222;
+        color:white;
+        cursor: pointer;
+        &:hover{
+            background-color: #555;
+        }
+    }
+    .Message-Body{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        margin: .5rem 0;
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+        border-radius: .5em;
+        padding: 1rem;
+        gap: 1rem;
+        .Process-Info{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: .5rem;
+            width: 100%;
+            div{
+                display: inline-flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+                white-space: nowrap;
+            }
+        }
+        .Process-Message-Error{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+        .Error-Container{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: .5em auto;
+            background-color: #000;
+            border-radius: .5em;
+            padding: .75em;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow: auto;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: .85rem;
+            line-height: 1.35;
+            text-align: left;
+            box-sizing: border-box;
+            pre{
+                position: absolute;
+                top: 0;
+                left: 1rem;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+    .Footer{
+        position: absolute;
+        bottom:.5em;
+        left:1rem;
+        width: calc(100% - 2rem);
+        height: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &::before{
+        content:'';
+        position: absolute;
+        inset:0;
+        width: calc(100% - 1px);
+        height: calc(100% - 1px);
+        border: 1px solid var(--minecraft-dialog-color);
+        filter: drop-shadow(0 0 0.5em var(--minecraft-dialog-color));
+        pointer-events: none;
+        mask: linear-gradient(transparent,black);
+        border-radius: .5em;
+    }
+}

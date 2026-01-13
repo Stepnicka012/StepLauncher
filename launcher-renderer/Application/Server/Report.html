@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StepLauncher | Diagnostic Center</title>
+    <link rel="icon" href="./Assets/icon.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color-app: #0c0d12;
+            --bg-color-sidebar: rgba(12, 13, 18, 0.95);
+            --minecraft-dialog-color: #71b7ff;
+            --text-color: white;
+            --text-dim: #626a77;
+            --border-color: rgba(113, 183, 255, 0.15);
+            --input-bg: rgba(255, 255, 255, 0.03);
+            --accent-glow: drop-shadow(0 0 0.5em var(--minecraft-dialog-color));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--minecraft-dialog-color) transparent;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg,var(--bg-color-app) 20%,rgba(40, 40, 79, 0.5));
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-color);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .Debug-Wrapper {
+            display: grid;
+            grid-template-columns: 18rem 1fr;
+            height: 100vh;
+            width: 100vw;
+            backdrop-filter: blur(15px);
+
+            .Sidebar-Debug {
+                background: var(--bg-color-sidebar);
+                border-right: 1px solid var(--border-color);
+                display: flex;
+                flex-direction: column;
+                padding: 2rem 0;
+                z-index: 10;
+
+                .Brand {
+                    display: inline-flex;
+                    gap: .5em;
+                    padding: 0 2rem;
+                    margin-bottom: 3rem;
+                    h2 {
+                        font-size: 0.9rem;
+                        letter-spacing: 3px;
+                        color: var(--minecraft-dialog-color);
+                        filter: var(--accent-glow);
+                    }
+                    img{
+                        pointer-events: none;
+                        filter: drop-shadow(0 0 1em var(--minecraft-dialog-color));
+
+                    }
+                }
+
+                .Nav-Group {
+                    flex: 1;
+                    .Nav-Item {
+                        padding: 1rem 2rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                        color: var(--text-dim);
+                        cursor: pointer;
+                        transition: 200ms;
+                        font-size: 0.85rem;
+                        border-left: 3px solid transparent;
+
+                        &:hover {
+                            color: #fff;
+                            background: rgba(255,255,255,0.02);
+                        }
+
+                        &.active {
+                            color: var(--minecraft-dialog-color);
+                            background: rgba(113, 183, 255, 0.05);
+                            border-left-color: var(--minecraft-dialog-color);
+                        }
+                    }
+                }
+
+                .Sidebar-Footer {
+                    padding: .5rem 2rem;
+                    border-top: 1px solid var(--border-color);
+                    font-size: 0.7rem;
+                    color: var(--text-dim);
+                }
+            }
+
+            .Main-Content {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                background: radial-gradient(circle at top right, rgba(113, 183, 255, 0.03), transparent);
+                overflow-y: auto;
+                padding-bottom: 5rem;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    pointer-events: none;
+                    mask: linear-gradient(transparent, black);
+                    opacity: 0.1;
+                }
+
+                header {
+                    padding: 3rem 4rem 1rem 4rem;
+                    h1 { font-size: 1.8rem; font-weight: 300; }
+                    p { color: var(--text-dim); margin-top: 0.5rem; font-size: 0.9rem; }
+                }
+
+                form {
+                    padding: 2rem 4rem;
+                    flex: 1;
+
+                    .Section-View {
+                        display: none;
+                        animation: fadeIn 300ms ease;
+                        &.active { display: block; }
+                    }
+
+                    .Form-Grid {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 2rem;
+                        margin-bottom: 2rem;
+                    }
+
+                    .Field-Block {
+                        margin-bottom: 2rem;
+
+                        label {
+                            display: block;
+                            font-size: 0.7rem;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            color: var(--minecraft-dialog-color);
+                            margin-bottom: 10px;
+                            font-weight: bold;
+
+                            .optional-tag {
+                                float: right;
+                                color:white;
+                                text-shadow: 0 0 0.5em var(--text-dim);
+                                font-weight: normal;
+                                text-transform: none;
+                            }
+                        }
+
+                        input, select, textarea {
+                            width: 100%;
+                            background: var(--input-bg);
+                            border: 1px solid var(--border-color);
+                            padding: 1rem;
+                            color: #fff;
+                            border-radius: 4px;
+                            font-size: 0.9rem;
+                            outline: none;
+                            transition: 250ms;
+                            option{
+                                background-color: var(--bg-color-app);
+                            }
+                            &:focus {
+                                border-color: var(--minecraft-dialog-color);
+                                background: rgba(255,255,255,0.06);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .Code-Container {
+            background: #050608;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #a5d6ff;
+            max-height: 400px;
+            overflow-y: auto;
+            position: relative;
+
+            .Copy-Action {
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                color: var(--text-dim);
+                cursor: pointer;
+                &:hover { color: #fff; }
+            }
+        }
+
+        .Upload-Drop-Zone {
+            border: 1px dashed var(--border-color);
+            background: rgba(255,255,255,0.01);
+            padding: 3rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 200ms;
+            
+            &:hover { background: rgba(113, 183, 255, 0.03); border-color: var(--minecraft-dialog-color); }
+            
+            i { font-size: 3rem; color: var(--text-dim); display: block; margin-bottom: 1rem; }
+            span { color: var(--text-dim); font-size: 0.9rem; }
+        }
+
+        .Fixed-Footer-Actions {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: calc(100% - 18rem);
+            background: #0007;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 1rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.5rem;
+            
+            border-top: 1px solid rgba(113, 183, 255, 0.1);
+            box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+
+            .btn {
+                position: relative;
+                padding: 0.7rem 2.5rem;
+                border-radius: .25rem;
+                font-size: 0.75rem;
+                font-weight: 800;
+                cursor: pointer;
+                border:none;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                display: flex;
+                align-items: center;
+                background-color: rgb(78, 226, 226);
+                gap: 10px;
+                overflow: hidden;
+                i { font-size: 1.1rem; }
+
+                &-cancel {
+                    background: rgba(255, 255, 255, 0.03);
+                    color: var(--text-dim);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    
+                    &:hover {
+                        background: rgba(248, 81, 73, 0.1);
+                        color: #ff7b72;
+                        border-color: rgba(248, 81, 73, 0.4);
+                        transform: translateY(-1px);
+                    }
+                }
+
+                &-submit {
+                    background: var(--minecraft-dialog-color); 
+                    color: #050608;
+                    border: none;
+                    box-shadow: 0 0 15px rgba(113, 183, 255, 0.3),
+                                inset 0 0 10px rgba(255, 255, 255, 0.2);
+                    
+                    &:hover {
+                        transform: translateY(-2px) scale(1.02);
+                        box-shadow: 0 0 25px rgba(113, 183, 255, 0.5),
+                                    inset 0 0 15px rgba(255, 255, 255, 0.4);
+                        filter: brightness(1.1);
+                    }
+
+                    &:active {
+                        transform: translateY(0) scale(0.98);
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -100%;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(
+                            90deg,
+                            transparent,
+                            rgba(255, 255, 255, 0.4),
+                            transparent
+                        );
+                        transition: 0.5s;
+                    }
+
+                    &:hover::after {
+                        left: 100%;
+                    }
+                }
+            }
+
+            &::before {
+                content: 'VERIFICAR DATOS ANTES DE ENVIAR';
+                font-size: 0.6rem;
+                color: var(--text-dim);
+                letter-spacing: 2px;
+                margin-right: auto;
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="Debug-Wrapper">
+        
+        <aside class="Sidebar-Debug">
+            <div class="Brand">
+                <img src="./Assets/icon.png" width="25px" height="25px">
+                <h2>STEPLAUNCHER</h2>
+            </div>
+            
+            <div class="Nav-Group">
+                <div class="Nav-Item active" onclick="showTab(event, 'tab-incident')">
+                    <i class="material-icons">bug_report</i> Incidencia
+                </div>
+                <div class="Nav-Item" onclick="showTab(event, 'tab-app')">
+                    <i class="material-icons">settings_remote</i> Launcher & MC
+                </div>
+                <div class="Nav-Item" onclick="showTab(event, 'tab-env')">
+                    <i class="material-icons">memory</i> Entorno
+                </div>
+                <div class="Nav-Item" onclick="showTab(event, 'tab-logs')">
+                    <i class="material-icons">terminal</i> Logs de Consola
+                </div>
+            </div>
+
+            <div class="Sidebar-Footer">
+                StepLauncher v1.0.0<br>
+                Diagnostic Tool
+            </div>
+        </aside>
+
+        <main class="Main-Content">
+            <header>
+                <h1>Diagnostic Center</h1>
+                <p>Reporta problemas de la app o de Minecraft para mejorar el launcher.</p>
+            </header>
+
+            <form action="https://formsubmit.co/stepnicka012@gmail.com" method="POST" enctype="multipart/form-data">
+                
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="[STEP-DEBUG] Nuevo reporte de error">
+
+                <div id="tab-incident" class="Section-View active">
+                    <div class="Form-Grid">
+                        <div class="Field-Block">
+                            <label>Origen del problema</label>
+                            <select name="problem_source">
+                                <option value="app_ui">Interfaz del Launcher (Visual/Botones)</option>
+                                <option value="app_logic">Lógica de la App (Configuración/Rutas)</option>
+                                <option value="mc_launch">Minecraft no abre</option>
+                                <option value="mc_crash">Minecraft se cierra solo</option>
+                                <option value="downloader">Error de descarga de archivos</option>
+                            </select>
+                        </div>
+                        <div class="Field-Block">
+                            <label>Gravedad</label>
+                            <select name="severity">
+                                <option value="annoying">Molesto pero jugable</option>
+                                <option value="urgent">Urgente (Afecta funciones)</option>
+                                <option value="critical">Crítico (No puedo entrar)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="Field-Block">
+                        <label>Descripción del suceso <span class="optional-tag">(Obligatorio)</span></label>
+                        <textarea name="description" rows="5" placeholder="Ej: Al darle a jugar, se queda cargando y luego se cierra sin avisar..." required></textarea>
+                    </div>
+
+                    <div class="Field-Block">
+                        <label>Capturas de pantalla <span class="optional-tag">(Opcional)</span></label>
+                        <div class="Upload-Drop-Zone">
+                            <input type="file" name="attachments" multiple accept="image/*" style="display:none" id="fileInput" onchange="updateFilesLabel()">
+                            <div onclick="document.getElementById('fileInput').click()">
+                                <i class="material-icons">collections</i>
+                                <span id="fileLabel">Arrastra imágenes aquí o haz clic para buscar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-app" class="Section-View">
+                    <div class="Field-Block">
+                        <label>Argumentos de Inicio (JVM)</label>
+                        <textarea name="jvm_args" readonly style="font-family: monospace; color: var(--minecraft-dialog-color);">--Xmx4096M -Djava.library.path=natives -Dminecraft.launcher.brand=StepLauncher</textarea>
+                    </div>
+
+                    <div class="Field-Block">
+                        <label>Comando Final de Ejecución <span class="optional-tag">Este es el que se enviará</span></label>
+                        <div class="Code-Container">
+                            <i class="material-icons Copy-Action">content_copy</i>
+                            <code id="finalCommand">
+                                # El comando generado por Argument.ts aparecerá aquí...
+                                C:\Java\bin\javaw.exe -cp "libraries.jar;client.jar" net.minecraft.Main --username StepNicka --version 1.20.1
+                            </code>
+                        </div>
+                        <input type="hidden" name="full_mc_command" value="[COMANDO_AQUÍ]">
+                    </div>
+                </div>
+
+                <div id="tab-env" class="Section-View">
+                    <div class="Form-Grid">
+                        <div class="Field-Block">
+                            <label>Sistema Operativo</label>
+                            <input type="text" name="os_info" value="Windows 10 Pro x64" readonly>
+                        </div>
+                        <div class="Field-Block">
+                            <label>Memoria RAM Libre</label>
+                            <input type="text" name="ram_free" value="8.4 GB / 16 GB" readonly>
+                        </div>
+                    </div>
+                    <div class="Field-Block">
+                        <label>Información adicional del sistema <span class="optional-tag">(Opcional)</span></label>
+                        <textarea name="extra_sys_info" placeholder="¿Tienes algún mod instalado? ¿Drivers actualizados?"></textarea>
+                    </div>
+                </div>
+
+                <div id="tab-logs" class="Section-View">
+                    <label style="color:var(--minecraft-dialog-color); font-size: 0.7rem; margin-bottom: 1rem; display: block;">VOLCADO DE CONSOLA (Stdout/Stderr)</label>
+                    <div class="Code-Container" style="height: 450px; color: #ccc;">
+                        [10:15:02] [StepLauncher/INFO]: Buscando actualizaciones...<br>
+                        [10:15:05] [StepLauncher/OK]: Versión al día.<br>
+                        [10:15:08] [LibraryBuyer/ERROR]: Fallo al descargar 'authlib-3.11.49.jar' (Timeout)<br>
+                        [10:15:08] [ArgumentBuilder/WARN]: No se pudo verificar la integridad de 1 archivo.<br>
+                        <span style="color:var(--minecraft-dialog-color)">[10:15:10] [StepLauncher/INFO]: Lanzando instancia 1.20.1...</span><br>
+                        [10:15:12] [Minecraft/STDERR]: Exception in thread "main" java.lang.NullPointerException...
+                    </div>
+                    <input type="hidden" name="raw_logs" value="[LOGS_COMPLETOS_AQUI]">
+                    <!-- <br>
+                    <label style="color:var(--minecraft-dialog-color); font-size: 0.7rem; margin-bottom: 1rem; display: block;">REPORTE FINAL (Stdout/Stderr)</label>
+                    <div class="Code-Container" style="height: 450px; color: #ccc;">
+                        [10:15:02] [StepLauncher/INFO]: Buscando actualizaciones...<br>
+                        [10:15:05] [StepLauncher/OK]: Versión al día.<br>
+                        [10:15:08] [LibraryBuyer/ERROR]: Fallo al descargar 'authlib-3.11.49.jar' (Timeout)<br>
+                        [10:15:08] [ArgumentBuilder/WARN]: No se pudo verificar la integridad de 1 archivo.<br>
+                        <span style="color:var(--minecraft-dialog-color)">[10:15:10] [StepLauncher/INFO]: Lanzando instancia 1.20.1...</span><br>
+                        [10:15:12] [Minecraft/STDERR]: Exception in thread "main" java.lang.NullPointerException...
+                    </div>
+                    <input type="hidden" name="raw_logs" value="[LOGS_COMPLETOS_AQUI]"> -->
+                </div>
+
+                <div class="Fixed-Footer-Actions">
+                    <button type="button" class="btn btn-cancel" onclick="window.close()">Descartar</button>
+                    <button type="submit" class="btn btn-submit">Enviar Diagnóstico</button>
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <style>
+        .BACKGROUND_VIDEO{
+            position: absolute;
+            inset:0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            source,video{
+                object-fit: cover;
+                pointer-events: none;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .BACKGROUND_VIDEO video {
+                display: none;
+            }
+        }
+    </style>
+    <div class="BACKGROUND_VIDEO">
+        <video autoplay muted loop>
+            <source src="./Assets/Video/minecraft.webm">
+        </video>
+    </div>
+    <script>
+        function showTab(e, tabId) {
+            // Quitar activos
+            document.querySelectorAll('.Section-View').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.Nav-Item').forEach(n => n.classList.remove('active'));
+            
+            // Activar actual
+            document.getElementById(tabId).classList.add('active');
+            e.currentTarget.classList.add('active');
+        }
+
+        function updateFilesLabel() {
+            const input = document.getElementById('fileInput');
+            const label = document.getElementById('fileLabel');
+            label.innerText = input.files.length > 0 
+                ? `${input.files.length} archivos seleccionados` 
+                : "Arrastra imágenes aquí o haz clic para buscar";
+        }
+    </script>
+    <script src="./JS/API.js"></script>
+    <script src="./JS/GenerateHTML.js"></script>
+</body>
+</html>

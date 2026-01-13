@@ -1,0 +1,428 @@
+.Dialogs_Container #DownloadDialog .Dialog-Body .Dialog-Sidebar{
+    position: absolute;
+    top: -3px;
+    height: calc(100% + 3px);
+    width: 4.2rem;
+    border-bottom-left-radius: .5em;
+    background-color: #0005;
+    .Dialog-Sidebar-Items-Container{
+        width: 80%;
+        height: calc(100% - .50em);
+        margin: .25em auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5em;
+        .Dialog-Sidebar-Item{
+            position: relative;
+            width: 1rem;
+            height: 2.2rem;
+            border-radius: 0.2em;
+            border: 1px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            user-select: none;
+            color: white;
+            cursor: pointer;
+            font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;
+            z-index: 1;
+            transition: border 150ms ease,
+                        background-color 200ms ease,
+                        width 250ms ease-in-out,
+                        padding 250ms ease-in-out,
+                        scale 100ms ease-in-out;
+            img{
+                width: 20px;
+            }
+            .Description{
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 155%;
+                padding: 0.1em 0.3em;
+                border-radius: 0.2em;
+                width: max-content;
+                background-color: var(--bg-color-sidebar);
+                pointer-events: none;
+                opacity: 0;
+                text-align: center;
+                transition: left .40s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                            opacity .15s linear;
+            }
+            &:active{
+                scale: 0.97;
+            }
+            &:hover{
+                background-color: color-mix(in srgb, var(--bg-color-sidebar) 70%, rgba(255, 255, 255, 0.50) 50%);
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                .Description{
+                    opacity: 1;
+                    left: 130%;
+                }
+            }
+        }
+    }
+}
+.Dialogs_Container #DownloadDialog .Dialog-Body .Dialog-Download-Active{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .Steps-Progress{
+        position: absolute;
+        top: -3px;
+        right: 0;
+        max-width: 70dvh;
+        min-width: 60dvh;
+        height: calc(100% + 3px);
+        display: flex;
+        align-items: center;
+        border-left: 1px solid #5555;
+        background-color: #0005;
+        z-index: -1;
+        .Progress_Text_Porcentaje{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2rem;
+            background-color: #0005;
+            border-top: 1px solid #5555;
+            border-bottom: 1px solid #5555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color:white;
+        }
+        .Image-Container{
+            position: relative;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 15rem;
+            height: 15rem;
+            pointer-events: none;
+            background-color: #222;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            z-index: -1;
+            img{
+                width: 10rem;            
+                inset: 0;
+                margin: auto;
+            }
+            &::after{
+                content: '';
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                scale: 1.03;
+                border-radius: 50%;
+                background: conic-gradient(var(--bg-color-download) var(--progress-download-bg),transparent 0%);
+				filter: drop-shadow(0 0 6px var(--bg-color-download));
+                z-index: -2;
+            }
+            &::before{
+                content:'';
+                position: absolute;
+                inset:0;
+                width: 100%;
+                height: 100%;
+                background-color: #111;
+                border-radius: 50%;
+                z-index: -1;
+            }
+        }
+    }
+    .Version-Download-Icon{
+        width: max-content;
+        height: 2rem;
+        position: absolute;
+        top: .5em;
+        left: .5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.7dvw;
+        color:white;
+        user-select: none;
+        pointer-events: none;
+        font-family: "Comfortaa",Arial, Helvetica, sans-serif;
+        img{
+            width: 2rem;
+            margin-right: 0.5em;
+            transform: translateY(-5px) scaleX(-1);
+        }
+    }
+    .Steps-Download{
+        position: absolute;
+        left: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 100%;
+        width: 35dvh;
+        margin: 0 1rem;
+        user-select: none;
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1rem;
+        color:white;
+        text-align: start;
+        font-family: 'Nunito Sans',Arial, Helvetica, sans-serif;
+        div{
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 1rem;
+            #TEXT{
+                width: 5rem;
+            }
+            hr{
+                height: 100%;
+                border: 1px solid #0005;
+            }
+            .Information{
+                display: flex;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 8rem !important;
+                gap: 0.5em !important;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.Dialogs_Container #DownloadDialog {
+    width: 45rem;
+    height: 25rem;
+    max-width: 90vw;
+    max-height: 85vh;
+    resize: both;
+    overflow: auto;
+	&::-webkit-resizer { display: none; }
+    &::after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 1rem;
+        height: 1rem;
+        background-image: url('../../Svg/others/arrow-down-right.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        pointer-events: none;
+        z-index: 500;
+    }
+	.Buttons-Download{
+		position: absolute;
+		bottom: .5em;
+		left: .5em;
+		min-width: 5rem;
+		padding: .25em .25em;
+		background-color: #0005;
+		border: 1px solid #5555;
+		border-radius: .5rem;
+		button{
+			border-radius: .25em;
+			padding: 0.25em 0.5em;
+			border:none;
+			background-color: #222;
+			color:white;
+			cursor: pointer;
+			&:hover{
+				background-color: #555;
+			}
+		}
+	}
+}
+
+.Dialogs_Container #DownloadDialog .Dialog-Body .Button-Download{
+    height: 2rem;
+    width: 8rem;
+    border-radius: 0.5em;
+    background-color: #0005;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 150ms ease-in-out,
+                border 250ms ease-in-out;
+    &:hover{
+        border: 1px solid aqua;
+        background-color: #5555;
+    }
+}
+
+.Dialogs_Container #DownloadDialog .Dialog-Body .Dialog-Overlay-Download{
+	position:absolute;
+	top:-3px;
+	left:0;
+	width:100%;
+	height:calc(100% + 3px);
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+
+	color:white;
+	font-family:'Dongle',Arial,Helvetica,sans-serif;
+	text-align:center;
+	font-size:1.5dvw;
+
+	background:
+		radial-gradient(circle at center,
+			rgba(0,0,0,.35) 0%,
+			rgba(0,0,0,.55) 55%,
+			rgba(0,0,0,.75) 100%
+		);
+
+	opacity:0;
+	pointer-events:none;
+	transform:scale(1.03) translateY(8px);
+
+	transition:
+		opacity 250ms ease,
+		transform 300ms cubic-bezier(.2,.8,.2,1),
+		backdrop-filter 300ms ease,
+		background 300ms ease;
+
+	z-index:500;
+
+	*{ margin:0; }
+
+	h1{
+		font-size:2.4dvw;
+		letter-spacing:.06em;
+		text-shadow:0 4px 25px #0008;
+
+		&::after{
+			content:'';
+			display:block;
+			width:120px;
+			height:2px;
+			margin:.4em auto;
+			background:linear-gradient(90deg,transparent,#fff5,transparent);
+		}
+	}
+
+	p{
+		margin-top:.6em;
+		font-size:1.2dvw;
+		opacity:.8;
+	}
+
+	&.Show{
+		opacity:1;
+		pointer-events:all;
+		transform:scale(1) translateY(0);
+
+		background:
+			radial-gradient(circle at center,
+				rgba(0,0,0,.25) 0%,
+				rgba(0,0,0,.5) 65%,
+				rgba(0,0,0,.8) 100%
+			);
+
+		backdrop-filter:blur(6px) saturate(120%);
+	}
+}
+
+.Dialogs_Container #DownloadDialog .Dialog-Body .Container-Version-Download{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .Selector{
+        position: absolute;
+        inset:0;
+        width: 90%;
+        margin: 0 auto;
+        height: calc(100% - 3rem);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5em;
+        .Type-Version{
+            margin-left: 3rem;
+        }
+        .Version-Container{
+            position: relative;
+            width: 10rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem auto;
+            gap: 0.5em;
+            z-index: 1;
+        }
+        .Search-Version{
+            width: 100%;
+            height: 2rem;
+            background-color: #0008;
+            border-radius: 0.5em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            input{
+                padding: 0 0.5em;
+                width: calc(100% - 1em);
+                height: 100%;
+                appearance: none;
+                border-radius: 0.5em;
+                background-color: transparent;
+                color:white;
+                border: none;
+            }
+            button{
+                background-color: transparent;
+                border: none;
+            }
+        }
+        .Select-Version{
+            width: 25rem;
+            height: calc(100% - 1rem);
+            overflow: hidden;
+            .Versions{
+                margin-top: .5rem;
+                width: 100%;
+                height: calc(100% - 3rem);
+                border-radius: 0.5em;
+                background-color: #0008;
+                overflow: auto;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+                div{
+                    position: relative;
+                    width: calc(100% - 10px);
+                    padding: .5rem 0;
+                    text-align: center;
+                    content-visibility: auto;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    &:hover{ background-color: #5555; }
+                    &.selected{
+                        background: linear-gradient(90deg,rgb(0,255,255,0.5),transparent,transparent,rgb(0,255,255,0.5));
+                        border-left: 5px solid aqua;
+                        border-right: 5px solid aqua;
+                    }
+                }
+            }
+        }
+    }
+}

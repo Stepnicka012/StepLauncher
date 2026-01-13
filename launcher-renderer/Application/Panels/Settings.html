@@ -1,0 +1,259 @@
+
+<!---
+script: ../../../dist/Render/Settings/Settings.js
+scriptEntry: default
+--->
+
+<div class="Panel-Settings">
+    <h2>Configuración del Launcher</h2>
+
+    <section class="Settings-Section">
+        <h3>🎮 Juego / Java</h3>
+        <div class="input-group">
+            <label>Ruta de Java (javaw o java)</label>
+            <div class="input-with-button">
+                <input id="s-java" type="text" placeholder="C:\path\to\javaw.exe" />
+                <button class="browse-java btn-browse"><img src="./Static/Svg/others/folder.svg" decoding="async"> Buscar</button>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>
+                <input id="s-launch-after-install" type="checkbox" />
+                Iniciar Minecraft automáticamente al finalizar instalación
+            </label>
+        </div>
+    </section>
+
+    <section class="Settings-Section">
+        <h3>Memoria</h3>
+        <div class="input-row">
+            <div class="input-group">
+                <label>Mínima (ej. 2G)</label>
+                <input id="s-memory-min" type="text" placeholder="2G" />
+            </div>
+            <div class="input-group">
+                <label>Máxima (ej. 4G)</label>
+                <input id="s-memory-max" type="text" placeholder="4G" />
+            </div>
+        </div>
+    </section>
+
+    <section class="Settings-Section">
+        <h3>🖥️ Ventana</h3>
+        <div class="input-row">
+            <div class="input-group">
+                <label>Ancho</label>
+                <input id="s-window-width" type="number" placeholder="1280" />
+            </div>
+            <div class="input-group">
+                <label>Alto</label>
+                <input id="s-window-height" type="number" placeholder="720" />
+            </div>
+        </div>
+        <div class="input-group">
+            <label>
+                <input id="s-window-fullscreen" type="checkbox" />
+                Pantalla completa
+            </label>
+        </div>
+        <div class="input-group">
+            <label>
+                <input id="s-close-on-launch" type="checkbox" />
+                Cerrar launcher al iniciar Minecraft
+            </label>
+        </div>
+    </section>
+
+    <section class="Settings-Section">
+        <h3>Interfaz</h3>
+        <div class="input-group">
+            <label>
+                <input id="s-use-video" type="checkbox" />
+                Usar video de fondo
+            </label>
+        </div>
+        <div class="input-group">
+            <label>Ruta del video de fondo</label>
+            <div class="input-with-button">
+                <input id="s-video-path" type="text" placeholder="C:\path\to\video.mp4" />
+                <button class="browse-video btn-browse"><img src="./Static/Svg/others/folder.svg" decoding="async"> Buscar</button>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Imagen de fondo (fallback)</label>
+            <div class="input-with-button">
+                <input id="s-bg-image" type="text" placeholder="./Static/Img/Background/cover.jpg" />
+                <button class="browse-image btn-browse"><img src="./Static/Svg/others/folder.svg" decoding="async"> Buscar</button>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Desenfoque (blur)</label>
+            <input id="s-bg-blur" type="text" placeholder="4px" />
+        </div>
+        <div class="input-group">
+            <label>
+                <input id="s-show-notifications" type="checkbox" />
+                Recibir notificaciones
+            </label>
+        </div>
+    </section>
+
+    <section class="Settings-Section">
+        <h3>Usuario</h3>
+        <div class="input-group">
+            <label>Nombre del jugador</label>
+            <input id="s-user-name" type="text" placeholder="SteveMC" />
+        </div>
+    </section>
+
+    <section class="Settings-Section">
+        <h3>⚡ Comportamiento</h3>
+        <div class="input-group">
+            <label>
+                <input id="s-reopen-on-exit" type="checkbox" />
+                Reabrir launcher al salir del juego
+            </label>
+        </div>
+    </section>
+
+    <div class="settings-actions">
+        <button id="s-refresh" class="btn-secondary">Refrescar</button>
+        <button id="s-resert-config" class="btn-danger">Resetear</button>
+        <button id="s-save" data-html-close="Settings" class="btn-primary">Cancelar</button>
+        <button id="s-save" data-html-close="Settings" class="btn-primary">Guardar</button>
+    </div>
+</div>
+
+<style>
+.Panel-Settings {
+    max-width: 900px;
+    margin: 0 auto;
+    *{user-select: none;}
+}
+
+.Panel-Settings h2 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.Settings-Section {
+    margin-bottom: 24px;
+    padding: 5px 15px;
+    background: rgba(0, 0, 0);
+    border-radius: 8px;
+}
+
+.Settings-Section h3 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.input-group {
+    margin-bottom: 12px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.input-group input[type="text"],
+.input-group input[type="number"] {
+    width: 100%;
+    padding: 8px 0px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+}
+
+.input-group input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.input-with-button {
+    display: flex;
+    gap: 8px;
+}
+
+.input-with-button input {
+    flex: 1;
+}
+
+.btn-browse {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25em;
+    font-size: 14px;
+}
+
+.btn-browse:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.settings-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    justify-content: flex-end;
+}
+
+.settings-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+}
+
+.btn-secondary {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #0b7dda;
+}
+
+.btn-danger {
+    background: #f44336;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #da190b;
+}
+</style>

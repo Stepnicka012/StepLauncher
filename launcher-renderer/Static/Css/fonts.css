@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Comfortaa";
+  src: url("../Fonts/Comfortaa.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Dongle";
+  src: url("../Fonts/Dongle-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("../Fonts/Fredoka.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Motiva Sans";
+  src: url("../Fonts/MotivaSansThin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("../Fonts/NunitoSans.ttf") format("truetype");
+}

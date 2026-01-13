@@ -1,60 +1,64 @@
 {
-  "name": "steplauncher",
-  "version": "1.0.0",
-  "buildVersion": "1000",
-  "description": "StepLauncher – Powerful Minecraft Launcher by NovaStepStudios",
-  "homepage": "https://steplauncher.web.app",
-  "main": "./launcher-dist/App.js",
-  "type": "module",
-  "author": "NovaStepStudios <stepnicka012@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Stepnicka012/StepLauncher.git"
-  },
-  "scripts": {
-    "start": "electron .",
-    "build": "tsc && electron-builder",
-    "build:win": "tsc && electron-builder --win",
-    "build:linux": "tsc && electron-builder --linux",
-    "build:all": "tsc && electron-builder --win --linux --mac"
-  },
-  "devDependencies": {
-    "@types/node": "^24.10.1",
-    "electron-builder": "^26.0.12",
-    "electron": "^39.2.4",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "pino": "^10.1.0",
-    "pino-pretty": "^13.1.2"
-  },
-  "build": {
-    "appId": "com.novastep.steplauncher",
-    "asar":"false",
-    "productName": "StepLauncher",
-    "directories": {
-      "output": "Releases/${productName}-v${version}-${buildVersion}-${platform}-${arch}"
-    },
-    "files": [
-      "launcher-dist/**/*",
-      "launcher-renderer/**/*",
-      "package.json",
-      "latest.yaml",
-      "LICENSE.md",
-      "Readme.md"
-    ],
-    "win": {
-      "target": ["zip"],
-      "icon": "./launcher-renderer/Static/Resources/icon.ico"
-    },
-    "linux": {
-      "target": ["zip"],
-      "icon": "./launcher-renderer/Static/Resources/icon.png",
-      "category": "Game"
-    },
-    "mac": {
-      "target": ["zip"],
-      "icon": "./launcher-renderer/Static/Resources/icon.icns"
-    }
-  }
+	"name": "steplauncher",
+	"version": "1.0.0",
+	"description": "¡El mejor launcher de Minecraft no premium!",
+	"author": "NovaStepStudios <stepnicka012@gmail.com>",
+	"main": "dist/App.js",
+	"module": "launcher-app/App.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"start": "electron .",
+		"dev": "tsc && electron .",
+		"build": "electron-builder",
+		"build:win": "electron-builder --win",
+		"build:linux": "electron-builder --linux",
+		"build:mac": "electron-builder --mac"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/discord-rpc": "^4.0.10",
+		"@types/express": "^5.0.6",
+		"@types/node": "^25.0.3",
+		"electron": "^39.2.7",
+		"electron-builder": "^26.4.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"discord-rpc": "^4.0.1",
+		"express": "^5.2.1"
+	},
+	"build": {
+		"appId": "com.novastep.steplauncher",
+		"asar": false,
+		"files": [
+			"dist/**/*",
+			"launcher-renderer/**/*",
+			"package.json"
+		],
+		"directories": {
+			"buildResources": "build",
+			"output": "release"
+		},
+		"win": {
+			"target": [
+				{
+					"target": "zip",
+					"arch": ["x64"]
+				}
+			],
+			"icon": "./launcher-renderer/Application/Resources/icon.ico"
+		},
+		"linux": {
+			"target": ["AppImage"],
+			"icon": "./launcher-renderer/Application/Resources/Icon.png",
+			"category": "Game"
+		},
+		"mac": {
+			"target": "dmg",
+			"icon": "./launcher-renderer/Application/Resources/icon.icns"
+		}
+	}
 }
