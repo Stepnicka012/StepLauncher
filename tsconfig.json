@@ -1,0 +1,52 @@
+{
+    "compilerOptions": {
+        "rootDir": "launcher-src",
+        "outDir": "launcher-dist",
+        "target": "esnext",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "moduleDetection": "force",
+        "verbatimModuleSyntax": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "removeComments": true,
+        "newLine": "lf",
+        "skipLibCheck": true,
+        "strict": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noPropertyAccessFromIndexSignature": false,
+        "paths": {
+            "@/*": [
+                "./launcher-src/*"
+            ],
+            "@novacore-engine": [
+                "./launcher-src/Main/Servicies/Java/index.ts"
+            ],
+            "@novacore-engine/*": [
+                "./launcher-src/Main/Servicies/Java/*"
+            ]
+        },
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        "launcher-src"
+    ],
+    "exclude": [
+        "launcher-dist",
+        "node_modules",
+        "release",
+        "build"
+    ]
+}

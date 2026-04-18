@@ -1,0 +1,26 @@
+{
+    "name": "steplauncher",
+    "type": "module",
+    "private": true,
+    "author": {
+        "email": "stepnicka012@gmail.com",
+        "name": "NovaStepStudios",
+        "url": "https://steplauncher.pages.dev"
+    },
+    "main": "./launcher-dist/App/App.js",
+    "devDependencies": {
+        "@types/bun": "latest",
+        "@types/node": "^25.5.0",
+        "@types/ws": "^8.18.1",
+        "electron": "^41.1.0"
+    },
+    "dependencies": {
+        "@types/adm-zip": "^0.5.8",
+        "adm-zip": "^0.5.17",
+        "typescript": "^5",
+        "ws": "^8.20.0"
+    },
+    "scripts": {
+        "start": "electron ."
+    }
+}

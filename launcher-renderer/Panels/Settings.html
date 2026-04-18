@@ -1,0 +1,440 @@
+<!---
+script: "../launcher-dist/Renderer/Panels/Settings.js"
+scriptEntry: "InitSettings"
+preloadScript: true
+--->
+<link rel="stylesheet" href="./Styles/Panels/Settings/Settings.css" />
+<div class="Settings_Container">
+    <div class="Settings_Sidebar">
+        <div class="Settings_Buttons_Side">
+            <!-- <button class="Sidebar_Button_Settings" data-setting-panel-open="accounts">
+                <img src="./Assets/Svg/users-group.svg" />
+                <p>Cuentas</p>
+            </button> -->
+            <button class="Sidebar_Button_Settings" data-setting-panel-open="launcher">
+                <img src="./Assets/Svg/adjustments.svg" />
+                <p>Launcher</p>
+            </button>
+            <button class="Sidebar_Button_Settings" data-setting-panel-open="minecraft">
+                <img src="./Assets/Svg/creeper.svg" />
+                <p>Minecraft</p>
+            </button>
+            <button class="Sidebar_Button_Settings" data-setting-panel-open="personalization">
+                <img src="./Assets/Svg/palette.svg" />
+                <p>Personalizacion</p>
+            </button>
+            <button class="Sidebar_Button_Settings" data-setting-panel-open="updates_and_patches">
+                <img src="./Assets/Svg/adjustments-cog.svg" />
+                <p>Actualizaciones y Parches</p>
+            </button>
+        </div>
+        <div class="Settings_Buttons_Side_Bottom">
+            <button class="Sidebar_Button_Settings" data-html-close="settings">
+                <img src="./Assets/Svg/save.svg" />
+                <p>Guardar</p>
+            </button>
+        </div>
+    </div>
+    <div class="Settings_Content">
+        <section data-setting-panel="accounts">
+            <header class="Title_Section">
+                <h1>Gestion de Cuentas</h1>
+            </header>
+            <main class="Content_Section grid-section">
+                <!-- <div class="User_Card">
+                    <div class="Skin"></div>
+                    <div class="Others">
+                        <div class="Buttons">
+                            <button>Activar Sesion</button>
+                        </div>
+                        <div class="Data-Info">
+                            <h1>Stepnicka012</h1>
+                            <p>UUID : 1566d265-5e1d-45b9-a668-70d936b6b891</p>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="Add_Account_Card"><img src="./Assets/Svg/user-add.svg"></div>
+            </main>
+        </section>
+        <section data-setting-panel="launcher">
+            <header class="Title_Section">
+                <h1>Configuracion del Launcher</h1>
+            </header>
+            <main class="Content_Section">
+                <div class="Separator">
+                    <h1>General</h1>
+                    <hr>
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Ocultar la ventana</h1>
+                        <p>Oculta la ventana del launcher al iniciar minecraft.</p>
+                    </div>
+                    <input checked type="checkbox" class="switch" id="HideTheWindowToLaunch">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Iniciar Minecraft al terminar la instalación</h1>
+                        <p>Ejecuta Minecraft automáticamente una vez finalizada la instalación.</p>
+                    </div>
+                    <input checked type="checkbox" class="switch" id="AutoStartMinecraft">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Opciones avanzadas y experimentales</h1>
+                        <p>Habilita configuraciones adicionales para un mayor control del sistema. Estas opciones están
+                            pensadas para usuarios avanzados y pueden impactar en el rendimiento o comportamiento de la
+                            aplicación.</p>
+                    </div>
+                    <input type="checkbox" class="switch" id="ActiveSectionAdvancedAndExperimental">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Reiniciar Configuraciones</h1>
+                        <p>Reestablece todas las configuraciones del launcher.</p>
+                    </div>
+                    <button id="RestartLauncher" class="restart-action"><img src="./Assets/Svg/reload.svg"></button>
+                </div>
+                <div class="Separator">
+                    <h1>Otros</h1>
+                    <hr>
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Sombras en la interfaz</h1>
+                        <p>Activa sombras en los elementos de la interfaz para una apariencia más profunda y moderna.
+                        </p>
+                    </div>
+                    <input type="checkbox" class="switch" checked id="ShadowInterface">
+                </div>
+
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Efecto de desenfoque (Blur)</h1>
+                        <p>Aplica un efecto de desenfoque en fondos y paneles para mejorar la estética visual.</p>
+                    </div>
+                    <input type="checkbox" class="switch" checked id="FilterBlur">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Navegacion con Raton</h1>
+                        <p>Muevete por la interfaz con el raton.</p>
+                    </div>
+                    <input checked type="checkbox" class="switch" id="AutoStartMinecraft">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Presencia en Discord</h1>
+                        <p>Muestra tu actividad de StepLauncher en tu perfil de Discord mientras lo usas.</p>
+                    </div>
+                    <input type="checkbox" class="switch" checked id="PresenceDiscord">
+                </div>
+
+                <div class="Advanced_section">
+                    <div class="Separator">
+                        <h1>Avanzados</h1>
+                        <hr>
+                    </div>
+                    <div class="OPTION_SETTINGS">
+                        <div class="TextAndDescription">
+                            <h1>Reiniciar módulos</h1>
+                            <p>Reinicia componentes internos del launcher. Útil si algún módulo no se ha inicializado
+                                correctamente, como <a href="https://github.com/Stepnicka012/NovaCore-Engine"
+                                    target="_blank"><strong>NovaCore-Engine</strong></a>, el motor de ejecución y
+                                descarga de Minecraft y modloaders.</p>
+                        </div>
+                        <button id="RestartModules" class="restart-action"><img src="./Assets/Svg/reload.svg"></button>
+                    </div>
+                    <div class="OPTION_SETTINGS">
+                        <div class="TextAndDescription">
+                            <h1>Limpiar archivos basura</h1>
+                            <p>Limpia el directorio <strong>".StepLauncher"</strong> antes de iniciar Minecraft. No
+                                elimina mundos, capturas ni servidores, solo archivos temporales como logs.</p>
+                        </div>
+                        <input type="checkbox" checked class="switch" id="CleanTrashToLaunch">
+                    </div>
+                    <div class="OPTION_SETTINGS">
+                        <div class="TextAndDescription">
+                            <h1>Modo debug</h1>
+                            <p>Muestra logs detallados del launcher y del sistema de ejecución de Minecraft. Útil para
+                                diagnosticar errores o crashes.</p>
+                        </div>
+                        <input type="checkbox" class="switch" id="ModeDebug">
+                    </div>
+                </div>
+            </main>
+        </section>
+        <section data-setting-panel="minecraft">
+            <header class="Title_Section">
+                <h1>Configuracion de Minecraft</h1>
+            </header>
+            <main class="Content_Section">
+                <div class="Separator">
+                    <h1>General</h1>
+                    <hr>
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Utilizar Java Recomendado por Mojang</h1>
+                        <p>Utiliza el Java oficial que recomiendo Mojang Studios.</p>
+                    </div>
+                    <input type="checkbox" class="switch" checked id="JavaRecommendedMojang">
+                </div>
+
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Tamaño de la Ventana</h1>
+                        <p>Cambia el tamaño de la ventana al iniciar minecraft</p>
+                    </div>
+                    <div id="WindowsControlResize"></div>
+                </div>
+
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Iniciar en Pantalla Completa</h1>
+                        <p>Inicia Minecraft en Pantalla Completa</p>
+                    </div>
+                    <input type="checkbox" class="switch" checked id="JavaRecommendedMojang">
+                </div>
+                <div class="Advanced_section">
+                    <div class="Separator">
+                        <h1>Avanzados</h1>
+                        <hr>
+                    </div>
+                    <div class="OPTION_SETTINGS">
+                        <div class="TextAndDescription">
+                            <h1>Utilizar archivos compartidos</h1>
+                            <p>
+                                Esta opción crea una carpeta llamada <strong>Shared</strong> dentro de
+                                <strong>.StepLauncher</strong>.
+                                Allí se almacenarán los assets, librerías y Java.
+                                La primera instalación puede tardar un poco más, pero las siguientes serán muchísimo más
+                                rápidas,
+                                ya que reutilizan estos archivos en lugar de descargarlos nuevamente.
+                                Esto acelera tanto la creación de instancias como el inicio del juego
+                                <strong>(también se aplica a las instancias existentes, y solo se aplica a proximas
+                                    instalaciones)</strong>.
+                            </p>
+                        </div>
+                        <input type="checkbox" class="switch" id="JavaRecommendedMojang">
+                    </div>
+                    <div class="OPTION_SETTINGS">
+                        <div class="TextAndDescription">
+                            <h1>Aceleración de Hardware</h1>
+                            <p>Optimiza el renderizado usando la GPU. Puede mejorar el rendimiento en algunos sistemas.
+                            </p>
+                        </div>
+                        <input type="checkbox" class="switch" id="hardwareAcceleration">
+                    </div>
+                    <div class="OPTION_SETTINGS">
+                        <div class="TextAndDescription">
+                            <h1>Uso de GPU</h1>
+                            <p>
+                                Define qué tarjeta gráfica utilizará el juego.
+                                <strong>Automático</strong> elige la mejor opción según tu sistema.
+                                Usa <strong>GPU dedicada</strong> para máximo rendimiento o
+                                <strong>integrada</strong> para menor consumo de energía.
+                            </p>
+                        </div>
+
+                        <div id="gpuPreference"></div>
+                    </div>
+                    <div class="OPTION_SETTINGS">
+                        <div class="TextAndDescription">
+                            <h1>Optimizador de memoria (GC)</h1>
+                            <p>
+                                Configura cómo Java gestiona la memoria del juego.
+                                <strong>Automático</strong> selecciona la mejor opción.
+                                Los modos avanzados pueden mejorar el rendimiento o reducir lag en equipos potentes.
+                            </p>
+                        </div>
+
+                        <div id="gcPreset"></div>
+                    </div>
+                </div>
+            </main>
+        </section>
+        <section data-setting-panel="personalization">
+            <header class="Title_Section">
+                <h1>Personalizacion del Launcher</h1>
+            </header>
+            <main class="Content_Section">
+                <div class="Separator">
+                    <h1>Tipografias</h1>
+                    <hr>
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Tipografia principal</h1>
+                        <p>Selecciona la fuente base que podria usar StepLauncher en toda la interfaz.</p>
+                    </div>
+                    <div id="LauncherTypography"></div>
+                </div>
+
+                <div class="Separator">
+                    <h1>Colores</h1>
+                    <hr>
+                </div>
+                <div class="OPTION_GRID">
+                    <div class="TextAndDescription">
+                        <h1>Personalizacion de colores</h1>
+                        <p>Define colores de referencia para las zonas principales del launcher. Estos campos son solo
+                            visuales por ahora.</p>
+                    </div>
+                    <div class="Personalization_ColorGrid">
+                        <div class="ColorField">
+                            <span>Barra de titulo</span>
+                            <div id="ColorTitlebar"></div>
+                        </div>
+                        <div class="ColorField">
+                            <span>Botones del menu</span>
+                            <div id="ColorMenuButtons"></div>
+                        </div>
+                        <div class="ColorField">
+                            <span>Paneles</span>
+                            <div id="ColorPanels"></div>
+                        </div>
+                        <div class="ColorField">
+                            <span>Hotbar</span>
+                            <div id="ColorHotbar"></div>
+                        </div>
+                        <div class="ColorField">
+                            <span>Notificaciones</span>
+                            <div id="ColorNotifications"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Separator">
+                    <h1>Gradientes</h1>
+                    <hr>
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Activar gradientes</h1>
+                        <p>Los gradientes empiezan desactivados y solo se aplicarian a paneles, barra de titulo y
+                            hotbar.</p>
+                    </div>
+                    <input type="checkbox" class="switch" id="EnableLauncherGradients">
+                </div>
+                <div class="OPTION_GRID">
+                    <div class="TextAndDescription">
+                        <h1>Configuracion de gradientes</h1>
+                        <p>Aqui puedes dejar definido el gradiente de paneles, barra de titulo y hotbar con dos colores
+                            y un angulo.</p>
+                    </div>
+                    <div class="Personalization_GradientGrid">
+                        <div class="GradientField">
+                            <h2>Paneles</h2>
+                            <div class="GradientField_Row">
+                                <div id="GradientPanelsStart"></div>
+                                <div id="GradientPanelsEnd"></div>
+                                <div id="GradientAnglePanels"></div>
+                            </div>
+                        </div>
+                        <div class="GradientField">
+                            <h2>Barra de titulo</h2>
+                            <div class="GradientField_Row">
+                                <div id="GradientTitlebarStart"></div>
+                                <div id="GradientTitlebarEnd"></div>
+                                <div id="GradientAngleTitlebar"></div>
+                            </div>
+                        </div>
+                        <div class="GradientField">
+                            <h2>Hotbar</h2>
+                            <div class="GradientField_Row">
+                                <div id="GradientHotbarStart"></div>
+                                <div id="GradientHotbarEnd"></div>
+                                <div id="GradientAngleHotbar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Separator">
+                    <h1>Barra de titulo</h1>
+                    <hr>
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Barra de titulo tipo MacOs</h1>
+                        <p>Activa una referencia visual inspirada en la organizacion de MacOs para la parte superior del
+                            launcher.</p>
+                    </div>
+                    <input type="checkbox" class="switch" id="MacOSTitlebarStyle">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Invertir posicion del contenido</h1>
+                        <p>Mueve el contenido principal a la posicion opuesta dentro de la barra de titulo.</p>
+                    </div>
+                    <input type="checkbox" class="switch" id="InvertTitlebarContent">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Ocultar logo</h1>
+                        <p>Oculta el logotipo en la barra superior para un estilo mas limpio y minimalista.</p>
+                    </div>
+                    <input type="checkbox" class="switch" id="HideTitlebarLogo">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Botones de MacOs</h1>
+                        <p>Muestra los controles superiores en formato inspirado en MacOs.</p>
+                    </div>
+                    <input type="checkbox" class="switch" id="MacOSTrafficButtons">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Botones redondos</h1>
+                        <p>Redondea los botones de control para un look mas ligero.</p>
+                    </div>
+                    <input type="checkbox" class="switch" id="RoundTitlebarButtons">
+                </div>
+
+                <div class="Personalization_ActionBar">
+                    <button class="Personalization_ApplyButton">Aplicar</button>
+                </div>
+            </main>
+        </section>
+        <section data-setting-panel="updates_and_patches">
+            <header class="Title_Section">
+                <h1>Actualizaciones y Parches</h1>
+            </header>
+            <main class="Content_Section">
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Actualizar StepLauncher</h1>
+                        <p>Actualiza automaticamente StepLauncher antes de iniciar la Aplicacion.</p>
+                    </div>
+                    <input checked type="checkbox" class="switch" id="AutoStartMinecraft">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Actualizacion automatica de NovaCore-Engine</h1>
+                        <p>Actualiza automaticamente el nucleo de StepLauncher.</p>
+                    </div>
+                    <input checked type="checkbox" class="switch" id="AutoStartMinecraft">
+                </div>
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Actualizacion automatica de Java</h1>
+                        <p>Actualiza automaticamente el Java requerido por NovaCore-Engine.</p>
+                    </div>
+                    <input checked type="checkbox" class="switch" id="AutoStartMinecraft">
+                </div>
+
+                <div class="OPTION_SETTINGS">
+                    <div class="TextAndDescription">
+                        <h1>Buscar Actualizaciones</h1>
+                    </div>
+                    <button id="SearchUpdates" class="restart-action"><img src="./Assets/Svg/reload.svg"></button>
+                </div>
+
+                <div class="Container_Changelog_Version">
+                    <div class="Banner"></div>
+                    <div class="Markdown"></div>
+                </div>
+            </main>
+        </section>
+    </div>
+</div>

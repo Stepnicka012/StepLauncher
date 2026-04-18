@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="modulepreload" href="../launcher-dist/Renderer/Global/Main.js" as="script" />
+    <link rel="preconnect" href="./Styles/Global/global.css" as="style" />
+    <link rel="preconnect" href="./Styles/Global/variables.css" as="style" />
+    <link rel="preconnect" href="./Styles/Global/fonts.css" as="style" />
+
+    <link rel="stylesheet" href="./Styles/Global/notification.css" data-lumina />
+    <link rel="stylesheet" href="./Styles/Global/global.css" />
+    <link rel="stylesheet" href="./Styles/Global/variables.css" />
+    <link rel="stylesheet" href="./Styles/Global/fonts.css" />
+
+    <link rel="icon" href="./Assets/icon.png" type="image/png" />
+    <title>StepLauncher</title>
+</head>
+<body>
+    <div class="TitleBar">
+        <div class="Title">
+            <img src="./Assets/icon.png" loading="lazy" decoding="async">
+            <div>
+                <h1>StepLauncher</h1>
+                <strong id="launcher_ver">1.0.0</strong>
+            </div>
+        </div>
+        <div class="Buttons">
+            <button onclick="window.ElectronAPI.minimize()"><img src="./Assets/Svg/minus.svg" /></button>
+            <button onclick="window.ElectronAPI.maximize()"><img src="./Assets/Svg/squares.svg" style="rotate: 90deg;" /></button>
+            <button onclick="window.ElectronAPI.close()"><img src="./Assets/Svg/x.svg" /></button>
+        </div>
+    </div>
+    <div class="Status-API"></div>
+    <div class="Bottom-App">
+        <div class="Buttons-Launcher">
+            <button data-html-open="settings">
+                <img src="./Assets/Svg/settings.svg" />
+                <p class="Description">Menu de Configuracion</p>
+            </button>
+            <button>
+                <img src="./Assets/Svg/photo.svg" />
+                <p class="Description">Menu de Fotos</p>
+            </button>
+            <button>
+                <img src="./Assets/Svg/instances.svg" />
+                <p class="Description">Menu de Instancias</p>
+            </button>
+            <button>
+                <img src="./Assets/Svg/download.svg" />
+                <p class="Description">Menu de Descargas</p>
+            </button>
+
+        </div>
+        <div class="Button-Launch">
+            <button class="Expand-List "><img src="./Assets/Svg/chevron-up.svg" /></button>
+            <div class="Text-Ver">
+                <p>No tienes versiones instaladas</p>
+            </div>
+        </div>
+    </div>
+    <div id="HTML_Container" class="HTML_Container"></div>
+    <script type="module" src="../launcher-dist/Renderer/Global/Main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+:root{
+    --background-main-app: url('../../Assets/Background/BgMain.webp');
+    --background-title-bar: #111;
+    --background-panels: #111;
+
+    --background-hotbar: #0005;
+    --background-button-hotbar: #111;
+    --background-button-hotbar-hover: #5555;
+    --background-description: #2225;
+
+    --background-button-launch: #2225;
+
+    --effect-blur: blur(4px);
+    --effect-shadow: 0 0 1rem #0005;
+}
